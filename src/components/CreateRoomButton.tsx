@@ -9,6 +9,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '../firebase'
+import Button from '@mui/material/Button'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -30,7 +31,11 @@ const CreateRoomButton: React.FC = () => {
     }
   }
 
-  return <button onClick={clickHandler}>Create a new room</button>
+  return (
+    <Button variant="contained" onClick={clickHandler}>
+      Create a new room
+    </Button>
+  )
 }
 
 export default CreateRoomButton

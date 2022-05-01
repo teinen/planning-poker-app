@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid'
 import {
   collection,
   addDoc,
@@ -17,7 +16,6 @@ const CreateRoomButton: React.FC = () => {
   const clickHandler = async () => {
     try {
       const addDocRef = await addDoc(collection(db, 'rooms'), {
-        roomId: uuidv4(),
         active: true,
         createdAt: serverTimestamp(),
       })
@@ -25,14 +23,14 @@ const CreateRoomButton: React.FC = () => {
       const docRef = doc(db, 'rooms', addDocRef.id)
       const docSnap = await getDoc(docRef)
 
-      navigate(`/room/${docSnap.data()?.roomId}`)
-    } catch (err) {
+      navigate(`/room/${docSnap.id}`)
+    } catch (error) {
       console.log('Room creation is failed.')
     }
   }
 
   return (
-    <Button colorScheme="blue" onClick={clickHandler}>
+    <Button color="white" colorScheme="cyan" onClick={clickHandler}>
       Create new room
     </Button>
   )

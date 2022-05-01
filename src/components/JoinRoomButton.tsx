@@ -38,19 +38,29 @@ const JoinRoomButton: React.FC = () => {
       const docRef = doc(db, 'rooms', roomIdInput)
       const docSnap = await getDoc(docRef)
 
-      if (docSnap.exists()) {
-        navigate(`/room/${docSnap.id}`)
-      } else {
+      if (!docSnap.exists()) {
         toast({
-          title: 'Room does not exist. Please check Room id again.',
+          title: 'Room does not exist.',
+          description: 'Please check Room id again.',
           status: 'error',
           position: 'top',
           isClosable: true,
         })
+      } else if (docSnap.data().active === false) {
+        toast({
+          title: 'Room is already deactivated.',
+          description: 'Please join another room, or create new one.',
+          status: 'error',
+          position: 'top',
+          isClosable: true,
+        })
+      } else {
+        navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {
       toast({
         title: 'Failed to get Room info.',
+        description: 'Please try again.',
         status: 'error',
         position: 'top',
         isClosable: true,

@@ -9,7 +9,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '../firebase'
-import Button from '@mui/material/Button'
+import { Button } from '@chakra-ui/react'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -32,8 +32,8 @@ const CreateRoomButton: React.FC = () => {
   }
 
   return (
-    <Button variant="contained" onClick={clickHandler}>
-      Create a new room
+    <Button colorScheme="blue" onClick={clickHandler}>
+      Create new room
     </Button>
   )
 }

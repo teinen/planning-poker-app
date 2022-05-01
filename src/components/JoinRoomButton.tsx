@@ -15,20 +15,34 @@ import {
   ModalFooter,
   useToast,
 } from '@chakra-ui/react'
-import { doc, getDoc } from 'firebase/firestore'
+import {
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore'
 import { db } from '../firebase'
 
 const JoinRoomButton: React.FC = () => {
   const navigate = useNavigate()
 
   const [roomIdInput, setRoomIdInput] = useState('')
+  const [nicknameInput, setNicknameInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toast = useToast()
 
   const handleRoomIdInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRoomIdInput(e.target.value)
+  }
+
+  const handleNicknameInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setNicknameInput(e.target.value)
   }
 
   const handleJoinRoomButtonClick = async () => {
@@ -55,6 +69,17 @@ const JoinRoomButton: React.FC = () => {
           isClosable: true,
         })
       } else {
+        const participantsCollectionRef = collection(
+          db,
+          'rooms',
+          docSnap.id,
+          'participants',
+        )
+        const addParticipantDocRef = await addDoc(participantsCollectionRef, {
+          name: nicknameInput,
+          createdAt: serverTimestamp(),
+        })
+
         navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {
@@ -96,7 +121,12 @@ const JoinRoomButton: React.FC = () => {
 
             <FormControl mt={4}>
               <FormLabel htmlFor="nickname">Nickname</FormLabel>
-              <Input id="nickname" placeholder="Nickname" />
+              <Input
+                id="nickname"
+                placeholder="Nickname"
+                value={nicknameInput}
+                onChange={handleNicknameInputChange}
+              />
             </FormControl>
           </ModalBody>
 

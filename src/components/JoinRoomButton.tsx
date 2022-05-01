@@ -13,6 +13,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  useToast,
 } from '@chakra-ui/react'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -21,7 +22,10 @@ const JoinRoomButton: React.FC = () => {
   const navigate = useNavigate()
 
   const [roomIdInput, setRoomIdInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const toast = useToast()
 
   const handleRoomIdInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRoomIdInput(e.target.value)
@@ -29,16 +33,30 @@ const JoinRoomButton: React.FC = () => {
 
   const handleJoinRoomButtonClick = async () => {
     try {
+      setIsLoading(true)
+
       const docRef = doc(db, 'rooms', roomIdInput)
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
         navigate(`/room/${docSnap.id}`)
       } else {
-        window.alert('Room does not exist.')
+        toast({
+          title: 'Room does not exist. Please check Room id again.',
+          status: 'error',
+          position: 'top',
+          isClosable: true,
+        })
       }
     } catch (error) {
-      console.log('Failed to get room info.')
+      toast({
+        title: 'Failed to get Room info.',
+        status: 'error',
+        position: 'top',
+        isClosable: true,
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -78,8 +96,10 @@ const JoinRoomButton: React.FC = () => {
             </Button>
 
             <Button
+              isLoading={isLoading}
               colorScheme="cyan"
               color="white"
+              isDisabled={roomIdInput === ''}
               onClick={handleJoinRoomButtonClick}
             >
               Join

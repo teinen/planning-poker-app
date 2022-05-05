@@ -4,7 +4,7 @@ import { onSnapshot, query, collection, DocumentData } from 'firebase/firestore'
 
 import { db } from '../firebase'
 
-import Cards from '../components/Cards'
+import CardList from '../components/CardList'
 
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')
@@ -38,7 +38,7 @@ const Room: React.FC = () => {
       <br />
       <div>
         <h2>Select your card</h2>
-        <Cards />
+        <CardList />
 
         <br />
 

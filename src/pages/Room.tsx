@@ -4,6 +4,8 @@ import { onSnapshot, query, collection, DocumentData } from 'firebase/firestore'
 
 import { db } from '../firebase'
 
+import Cards from '../components/Cards'
+
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')
   const roomId = match?.params.roomId
@@ -35,7 +37,12 @@ const Room: React.FC = () => {
       Room ID: {match?.params.roomId}
       <br />
       <div>
-        <h3>Participants</h3>
+        <h2>Select your card</h2>
+        <Cards />
+
+        <br />
+
+        <h2>Participants</h2>
         <ul>
           {participants.map((participant) => (
             <li key={participant.id}>{participant.name}</li>

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../firebase'
 import { Button } from '@chakra-ui/react'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+
+import { db } from '../firebase'
 import { DEFAULT_NICKNAME } from '../const'
+
+import StorageService from '../services/storage'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -22,12 +25,14 @@ const CreateRoomButton: React.FC = () => {
         addRoomDocRef.id,
         'participants',
       )
+
       const addParticipantDocRef = await addDoc(participantsCollectionRef, {
         name: DEFAULT_NICKNAME,
         estimate: '',
         createdAt: serverTimestamp(),
       })
 
+      StorageService.addParticipantId(addParticipantDocRef.id)
       navigate(`/room/${addRoomDocRef.id}`)
     } catch (error) {
       console.log('Room creation is failed.')

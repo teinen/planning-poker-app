@@ -27,7 +27,9 @@ const ParticipantList: React.FC<Props> = (props) => {
     const total = estimates.reduce((prev, current) => {
       return prev + current
     }, 0)
-    return total / estimates.length
+
+    // 小数点第一位まで
+    return Math.round((total / estimates.length) * 10) / 10
   }, [estimates])
 
   const sd = useMemo(() => {
@@ -38,7 +40,8 @@ const ParticipantList: React.FC<Props> = (props) => {
       }, 0) / estimates.length
 
     // 分散の平方根=標準偏差
-    return Math.sqrt(dist)
+    // 小数点第一位まで
+    return Math.round(Math.sqrt(dist) * 10) / 10
   }, [estimates])
 
   return (

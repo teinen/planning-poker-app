@@ -23,6 +23,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '../firebase'
+import { DEFAULT_NICKNAME } from '../const'
 
 const JoinRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -76,7 +77,8 @@ const JoinRoomButton: React.FC = () => {
           'participants',
         )
         const addParticipantDocRef = await addDoc(participantsCollectionRef, {
-          name: nicknameInput,
+          name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
+          estimate: '',
           createdAt: serverTimestamp(),
         })
 

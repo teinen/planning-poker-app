@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
 import { onSnapshot, query, collection, DocumentData } from 'firebase/firestore'
 
 import { db } from '../firebase'
 
-import Cards from '../components/Cards'
+import CardList from '../components/CardList'
+import ParticipantList from '../components/ParticipantList'
 
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')
@@ -18,17 +19,19 @@ const Room: React.FC = () => {
 
   const q = query(collection(db, 'rooms', roomId, 'participants'))
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    setParticipants([])
+  useEffect(() => {
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const result: DocumentData[] = []
 
-    const result: DocumentData[] = []
+      querySnapshot.forEach((doc) => {
+        result.push({ id: doc.id, ...doc.data() })
+      })
 
-    querySnapshot.forEach((doc) => {
-      result.push(doc.data())
+      setParticipants(result)
+      console.log(result)
     })
-
-    setParticipants(result)
-  })
+    return () => unsubscribe()
+  }, [])
 
   return (
     <>
@@ -38,16 +41,12 @@ const Room: React.FC = () => {
       <br />
       <div>
         <h2>Select your card</h2>
-        <Cards />
+        <CardList />
 
         <br />
 
         <h2>Participants</h2>
-        <ul>
-          {participants.map((participant) => (
-            <li key={participant.id}>{participant.name}</li>
-          ))}
-        </ul>
+        <ParticipantList participants={participants} />
       </div>
     </>
   )

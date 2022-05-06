@@ -22,8 +22,11 @@ import {
   addDoc,
   serverTimestamp,
 } from 'firebase/firestore'
+
 import { db } from '../firebase'
 import { DEFAULT_NICKNAME } from '../const'
+
+import StorageService from '../services/storage'
 
 const JoinRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -76,12 +79,14 @@ const JoinRoomButton: React.FC = () => {
           docSnap.id,
           'participants',
         )
+
         const addParticipantDocRef = await addDoc(participantsCollectionRef, {
           name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
           estimate: '',
           createdAt: serverTimestamp(),
         })
 
+        StorageService.addParticipantId(addParticipantDocRef.id)
         navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {

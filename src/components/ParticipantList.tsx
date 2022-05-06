@@ -12,6 +12,7 @@ const ParticipantList: React.FC<Props> = (props) => {
       <Table variant="striped">
         <Thead>
           <Tr>
+            {/* <Td>Id</Td> */}
             <Td>Name</Td>
             <Td>Estimate</Td>
           </Tr>
@@ -20,6 +21,7 @@ const ParticipantList: React.FC<Props> = (props) => {
         <Tbody>
           {props.participants.map((participant) => (
             <Tr key={participant.id}>
+              {/* <Td>{participant.id}</Td> */}
               <Td>{participant.name}</Td>
               <Td>
                 {participant.estimate !== '' ? participant.estimate : 'Not yet'}

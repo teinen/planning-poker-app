@@ -30,6 +30,7 @@ const Room: React.FC = () => {
       setParticipants(result)
       console.log(result)
     })
+    return () => unsubscribe()
   }, [])
 
   return (

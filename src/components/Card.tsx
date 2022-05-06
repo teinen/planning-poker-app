@@ -1,16 +1,21 @@
 import React from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { Box } from '@chakra-ui/react'
 
-import { CardType, store } from '../store'
+import { CardType, isSelectedCardSelector, selectedCardState } from '../store'
 
 type Props = {
   value: CardType
 }
 
 const Card: React.FC<Props> = (props) => {
+  const [_, setSelectedCardState] = useRecoilState(selectedCardState)
+  const isSelectedCard = useRecoilValue(isSelectedCardSelector(props.value))
+
+  const bgColor = isSelectedCard ? 'green.200' : 'gray.200'
+
   const handleClick = () => {
-    store.actions.useUpdateSelectedCard(props.value)
-    console.log(`selected value is ${store.selectors.useSelectedCard}`)
+    setSelectedCardState(props.value)
   }
 
   return (
@@ -21,7 +26,7 @@ const Card: React.FC<Props> = (props) => {
       p="8px"
       w="60px"
       h="80px"
-      bg="gray.200"
+      bg={bgColor}
       onClick={handleClick}
     >
       {props.value}

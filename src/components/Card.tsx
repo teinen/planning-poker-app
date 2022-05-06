@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMatch } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { doc, updateDoc } from 'firebase/firestore'
 import { Box } from '@chakra-ui/react'
 
@@ -20,7 +20,7 @@ const Card: React.FC<Props> = (props) => {
     throw new Error()
   }
 
-  const [_, setSelectedCardState] = useRecoilState(selectedCardState)
+  const setSelectedCardState = useSetRecoilState(selectedCardState)
   const isSelectedCard = useRecoilValue(isSelectedCardSelector(props.value))
 
   const bgColor = isSelectedCard ? 'green.200' : 'gray.200'

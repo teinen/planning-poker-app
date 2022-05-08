@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react'
 import {
   TableContainer,
   Table,
@@ -9,6 +8,7 @@ import {
   Td,
 } from '@chakra-ui/react'
 import { DocumentData } from 'firebase/firestore'
+import React, { useMemo } from 'react'
 
 type Props = {
   participants: DocumentData[]

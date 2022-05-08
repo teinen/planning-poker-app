@@ -1,12 +1,12 @@
+import { Box } from '@chakra-ui/react'
+import { doc, updateDoc } from 'firebase/firestore'
 import React from 'react'
 import { useMatch } from 'react-router-dom'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
-import { doc, updateDoc } from 'firebase/firestore'
-import { Box } from '@chakra-ui/react'
 
 import { db } from '../firebase'
-import { CardType, isSelectedCardSelector, selectedCardState } from '../store'
 import StorageService from '../services/storage'
+import { CardType, isSelectedCardSelector, selectedCardState } from '../store'
 
 type Props = {
   value: CardType

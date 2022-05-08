@@ -1,18 +1,31 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '@chakra-ui/react'
+import { Button, useDisclosure } from '@chakra-ui/react'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { db } from '../firebase'
 import { DEFAULT_NICKNAME } from '../const'
-
+import { db } from '../firebase'
 import StorageService from '../services/storage'
+import CreateRoomModal from './CreateRoomModal'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
 
-  const handleClick = async () => {
+  const [nicknameInput, setNicknameInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleNicknameInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setNicknameInput(e.target.value)
+  }
+
+  const handleCreateRoomButtonClick = async () => {
     try {
+      setIsLoading(true)
+
       const roomsCollectionRef = collection(db, 'rooms')
       const addRoomDocRef = await addDoc(roomsCollectionRef, {
         active: true,
@@ -27,7 +40,7 @@ const CreateRoomButton: React.FC = () => {
       )
 
       const addParticipantDocRef = await addDoc(participantsCollectionRef, {
-        name: DEFAULT_NICKNAME,
+        name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
         estimate: '',
         createdAt: serverTimestamp(),
       })
@@ -40,9 +53,20 @@ const CreateRoomButton: React.FC = () => {
   }
 
   return (
-    <Button color="white" colorScheme="cyan" onClick={handleClick}>
-      Create new room
-    </Button>
+    <>
+      <Button color="white" colorScheme="cyan" onClick={onOpen}>
+        Create new room
+      </Button>
+
+      <CreateRoomModal
+        isOpen={isOpen}
+        isLoading={isLoading}
+        nicknameInput={nicknameInput}
+        onClose={onClose}
+        handleNicknameInputChange={handleNicknameInputChange}
+        handleCreateRoomButtonClick={handleCreateRoomButtonClick}
+      />
+    </>
   )
 }
 

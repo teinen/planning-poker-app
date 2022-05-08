@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
-  useDisclosure,
   Button,
   FormControl,
   FormLabel,
@@ -13,6 +10,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import {
@@ -22,10 +20,11 @@ import {
   addDoc,
   serverTimestamp,
 } from 'firebase/firestore'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { db } from '../firebase'
 import { DEFAULT_NICKNAME } from '../const'
-
+import { db } from '../firebase'
 import StorageService from '../services/storage'
 
 const JoinRoomButton: React.FC = () => {
@@ -130,7 +129,7 @@ const JoinRoomButton: React.FC = () => {
               <FormLabel htmlFor="nickname">Nickname</FormLabel>
               <Input
                 id="nickname"
-                placeholder="Nickname"
+                placeholder="Jane Doe"
                 value={nicknameInput}
                 onChange={handleNicknameInputChange}
               />

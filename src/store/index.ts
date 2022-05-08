@@ -1,4 +1,5 @@
 import { atom, selectorFamily } from 'recoil'
+
 import { RecoilAtomKeys, RecoilSelectorKeys } from './RecoilKeys'
 
 export type CardType = '' | '1' | '2' | '3' | '5' | '8' | '13' | '21' | '?'

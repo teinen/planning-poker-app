@@ -21,8 +21,28 @@ module.exports = {
   },
   plugins: [
     'react',
+    'import',
+    'unused-imports',
     '@typescript-eslint'
   ],
   rules: {
+    'unused-imports/no-unused-imports': 'error',
+    'import/named': 'off',
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling'],
+          'object',
+          'type',
+          'index',
+        ],
+        'newlines-between': 'always',
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
+    ],
   }
 }

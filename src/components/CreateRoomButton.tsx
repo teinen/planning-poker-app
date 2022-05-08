@@ -1,15 +1,17 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Button } from '@chakra-ui/react'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { db } from '../firebase'
 import { DEFAULT_NICKNAME } from '../const'
-
+import { db } from '../firebase'
 import StorageService from '../services/storage'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
+
+  const [nicknameInput, setNicknameInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleClick = async () => {
     try {

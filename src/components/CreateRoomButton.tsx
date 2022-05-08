@@ -1,17 +1,4 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Button, useDisclosure } from '@chakra-ui/react'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -19,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
+import CreateRoomModal from './CreateRoomModal'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -70,41 +58,14 @@ const CreateRoomButton: React.FC = () => {
         Create new room
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create new room</ModalHeader>
-
-          <ModalCloseButton />
-
-          <ModalBody>
-            <FormControl>
-              <FormLabel htmlFor="nickname">Nickname</FormLabel>
-              <Input
-                id="nickname"
-                placeholder="John Doe"
-                value={nicknameInput}
-                onChange={handleNicknameInputChange}
-              />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
-              cancel
-            </Button>
-
-            <Button
-              isLoading={isLoading}
-              colorScheme="cyan"
-              color="white"
-              onClick={handleCreateRoomButtonClick}
-            >
-              Create room
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <CreateRoomModal
+        isOpen={isOpen}
+        isLoading={isLoading}
+        nicknameInput={nicknameInput}
+        onClose={onClose}
+        handleNicknameInputChange={handleNicknameInputChange}
+        handleCreateRoomButtonClick={handleCreateRoomButtonClick}
+      />
     </>
   )
 }

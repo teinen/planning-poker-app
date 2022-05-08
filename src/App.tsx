@@ -1,12 +1,12 @@
-import React from 'react'
-import { RecoilRoot } from 'recoil'
-import { Routes, Route } from 'react-router-dom'
 import { Container } from '@chakra-ui/react'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 import './App.css'
 
-import Top from './pages/Top'
 import Room from './pages/Room'
+import Top from './pages/Top'
 
 function App() {
   return (

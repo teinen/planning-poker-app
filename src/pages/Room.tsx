@@ -1,11 +1,11 @@
+import { onSnapshot, query, collection, DocumentData } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
-import { onSnapshot, query, collection, DocumentData } from 'firebase/firestore'
-
-import { db } from '../firebase'
 
 import CardList from '../components/CardList'
 import ParticipantList from '../components/ParticipantList'
+import { db } from '../firebase'
+
 
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')

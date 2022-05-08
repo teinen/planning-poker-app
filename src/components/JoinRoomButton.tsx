@@ -129,7 +129,7 @@ const JoinRoomButton: React.FC = () => {
               <FormLabel htmlFor="nickname">Nickname</FormLabel>
               <Input
                 id="nickname"
-                placeholder="Nickname"
+                placeholder="Jane Doe"
                 value={nicknameInput}
                 onChange={handleNicknameInputChange}
               />

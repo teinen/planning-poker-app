@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
 
 import CardList from '../components/CardList'
+import OwnerControls from '../components/OwnerControls'
 import ParticipantList from '../components/ParticipantList'
 import { db } from '../firebase'
-
 
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')
@@ -47,6 +47,10 @@ const Room: React.FC = () => {
 
         <h2>Participants</h2>
         <ParticipantList participants={participants} />
+
+        <br />
+
+        <OwnerControls />
       </div>
     </>
   )

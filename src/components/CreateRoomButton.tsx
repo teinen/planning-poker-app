@@ -44,6 +44,7 @@ const CreateRoomButton: React.FC = () => {
       const addParticipantDocRef = await addDoc(participantsCollectionRef, {
         name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
         estimate: '',
+        owner: true,
         createdAt: serverTimestamp(),
       })
 

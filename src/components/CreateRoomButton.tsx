@@ -1,4 +1,4 @@
-import { Button, useDisclosure } from '@chakra-ui/react'
+import { Button, useDisclosure, useToast } from '@chakra-ui/react'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +15,8 @@ const CreateRoomButton: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const toast = useToast()
 
   const handleNicknameInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -48,7 +50,13 @@ const CreateRoomButton: React.FC = () => {
       StorageService.addParticipantId(addParticipantDocRef.id)
       navigate(`/room/${addRoomDocRef.id}`)
     } catch (error) {
-      console.log('Room creation is failed.')
+      toast({
+        title: 'Room creation is failed.',
+        description: 'Please try again.',
+        status: 'error',
+        position: 'top',
+        isClosable: true,
+      })
     }
   }
 

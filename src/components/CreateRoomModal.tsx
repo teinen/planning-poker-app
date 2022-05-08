@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   FormControl,
   FormLabel,
@@ -32,7 +34,12 @@ const CreateRoomModal: React.FC<Props> = (props) => {
         <ModalCloseButton />
 
         <ModalBody>
-          <FormControl>
+          <Alert status="info" variant="left-accent">
+            <AlertIcon />
+            You will be the room owner.
+          </Alert>
+
+          <FormControl mt="16px">
             <FormLabel htmlFor="nickname">Nickname</FormLabel>
             <Input
               id="nickname"

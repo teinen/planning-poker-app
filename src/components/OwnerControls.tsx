@@ -52,7 +52,7 @@ const OwnerControls: React.FC = () => {
   return (
     <>
       <Tooltip hasArrow label="Reset all estimates">
-        <Button colorScheme="green" onClick={handleResetButtonClick}>
+        <Button colorScheme="blue" onClick={handleResetButtonClick}>
           Reset
         </Button>
       </Tooltip>

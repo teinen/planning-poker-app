@@ -3,10 +3,14 @@ import React from 'react'
 import CreateRoomButton from '../components/CreateRoomButton'
 import JoinRoomButton from '../components/JoinRoomButton'
 
+const rootStyle = {
+  padding: '16px 0',
+}
+
 const Top: React.FC = () => {
   return (
-    <div>
-      Top Page
+    <div style={rootStyle}>
+      Planning Poker App (Alpha)
       <br />
       <br />
       <CreateRoomButton />

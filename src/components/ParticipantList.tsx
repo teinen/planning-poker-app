@@ -57,12 +57,12 @@ const ParticipantList: React.FC<Props> = (props) => {
         </Thead>
 
         <Tbody>
-          {props.participants.map((participant, idx) => (
+          {props.participants.map((participant) => (
             <Tr key={participant.id}>
               {/* <Td>{participant.id}</Td> */}
               <Td display="flex" alignItems="center">
                 {participant.name}
-                {idx === 0 && <StarIcon ml="8px" color="gold" />}
+                {participant.owner && <StarIcon ml="8px" color="gold" />}
               </Td>
               <Td isNumeric>
                 {participant.estimate !== '' ? participant.estimate : 'Not yet'}

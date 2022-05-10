@@ -16,30 +16,6 @@ import ParticipantList from '../components/ParticipantList'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
 
-const useCurrentParticipant = (roomId: string) => {
-  const participantId = StorageService.getParticipantId()
-
-  if (!participantId) {
-    return
-  }
-
-  const participantDocRef = doc(
-    db,
-    'rooms',
-    roomId,
-    'participants',
-    participantId,
-  )
-
-  getDoc(participantDocRef).then((docSnap) => {
-    if (docSnap.exists()) {
-      console.log(docSnap.data())
-    } else {
-      console.log('participant does not exist')
-    }
-  })
-}
-
 const Room: React.FC = () => {
   const match = useMatch('/room/:roomId')
   const roomId = match?.params.roomId
@@ -51,9 +27,9 @@ const Room: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<DocumentData>()
   const [participants, setParticipants] = useState([] as DocumentData[])
 
-  const isOwner = () => {
-    return currentUser?.owner === true
-  }
+  // const isOwner = () => {
+  //   return currentUser?.owner === true
+  // }
 
   const q = query(
     collection(db, 'rooms', roomId, 'participants'),
@@ -78,6 +54,7 @@ const Room: React.FC = () => {
     getDoc(participantDocRef).then((docSnap) => {
       if (docSnap.exists()) {
         setCurrentUser(docSnap.data())
+        console.log(currentUser)
       } else {
         console.log('participant does not exist')
       }

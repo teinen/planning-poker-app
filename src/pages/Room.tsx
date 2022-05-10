@@ -27,9 +27,9 @@ const Room: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<DocumentData>()
   const [participants, setParticipants] = useState([] as DocumentData[])
 
-  // const isOwner = () => {
-  //   return currentUser?.owner === true
-  // }
+  const isOwner = () => {
+    return currentUser?.owner === true
+  }
 
   const q = query(
     collection(db, 'rooms', roomId, 'participants'),
@@ -54,7 +54,6 @@ const Room: React.FC = () => {
     getDoc(participantDocRef).then((docSnap) => {
       if (docSnap.exists()) {
         setCurrentUser(docSnap.data())
-        console.log(currentUser)
       } else {
         console.log('participant does not exist')
       }
@@ -92,8 +91,7 @@ const Room: React.FC = () => {
 
         <br />
 
-        {/* {isOwner() ?? <OwnerControls />} */}
-        <OwnerControls />
+        {isOwner() ? <OwnerControls /> : <></>}
       </div>
     </>
   )

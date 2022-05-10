@@ -1,3 +1,4 @@
+import { StarIcon } from '@chakra-ui/icons'
 import {
   TableContainer,
   Table,
@@ -45,13 +46,13 @@ const ParticipantList: React.FC<Props> = (props) => {
   }, [estimates])
 
   return (
-    <TableContainer m="auto" maxW="300px">
+    <TableContainer m="auto" maxW="400px">
       <Table variant="striped">
         <Thead>
           <Tr>
             {/* <Td>Id</Td> */}
             <Td>Name</Td>
-            <Td>Estimate</Td>
+            <Td width="50%">Estimate</Td>
           </Tr>
         </Thead>
 
@@ -59,7 +60,10 @@ const ParticipantList: React.FC<Props> = (props) => {
           {props.participants.map((participant) => (
             <Tr key={participant.id}>
               {/* <Td>{participant.id}</Td> */}
-              <Td>{participant.name}</Td>
+              <Td display="flex" alignItems="center">
+                {participant.name}
+                {participant.owner && <StarIcon ml="8px" color="gold" />}
+              </Td>
               <Td isNumeric>
                 {participant.estimate !== '' ? participant.estimate : 'Not yet'}
               </Td>

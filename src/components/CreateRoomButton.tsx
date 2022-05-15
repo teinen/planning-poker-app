@@ -58,6 +58,8 @@ const CreateRoomButton: React.FC = () => {
         position: 'top',
         isClosable: true,
       })
+
+      setIsLoading(false)
     }
   }
 

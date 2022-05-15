@@ -1,9 +1,16 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2022, 5, 30);
+    match /rooms/{roomId} {
+      allow read;
+      allow create, update: if request.resource.id == roomId;
+      
+      match /participants/{participantId} {
+        allow read;
+        allow create: if request.resource.id == participantId;
+        allow update: if request.resource.id == participantId
+                      || resource.data.owner == true;
+      }
     }
   }
 }

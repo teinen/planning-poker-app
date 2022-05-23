@@ -31,6 +31,7 @@ const CreateRoomButton: React.FC = () => {
       const roomsCollectionRef = collection(db, 'rooms')
       const addRoomDocRef = await addDoc(roomsCollectionRef, {
         active: true,
+        revealed: false,
         createdAt: serverTimestamp(),
       })
 

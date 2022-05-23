@@ -11,11 +11,34 @@ import {
 import { DocumentData } from 'firebase/firestore'
 import React, { useMemo } from 'react'
 
+import StorageService from '../services/storage'
+
 type Props = {
+  room: DocumentData | undefined
   participants: DocumentData[]
 }
 
 const ParticipantList: React.FC<Props> = (props) => {
+  const isMe = (id: string): boolean => {
+    return StorageService.getParticipantId() === id
+  }
+
+  const isRevealed = (): boolean => {
+    return props.room?.revealed === true
+  }
+
+  const displayedEstimate = (p: DocumentData): string => {
+    let result = ''
+
+    if (isMe(p.id)) {
+      result = p.estimate !== '' ? p.estimate : 'Not yet'
+    } else {
+      result = p.estimate !== '' ? (isRevealed() ? p.estimate : '*') : 'Not yet'
+    }
+
+    return result
+  }
+
   const estimates: number[] = useMemo(() => {
     return props.participants
       .filter((participant) => {
@@ -64,9 +87,7 @@ const ParticipantList: React.FC<Props> = (props) => {
                 {participant.name}
                 {participant.owner && <StarIcon ml="8px" color="gold" />}
               </Td>
-              <Td isNumeric>
-                {participant.estimate !== '' ? participant.estimate : 'Not yet'}
-              </Td>
+              <Td isNumeric>{displayedEstimate(participant)}</Td>
             </Tr>
           ))}
         </Tbody>
@@ -75,9 +96,9 @@ const ParticipantList: React.FC<Props> = (props) => {
           <Tr>
             <Td></Td>
             <Td isNumeric>
-              {`Average: ${average}`}
+              {`Average: ${isRevealed() ? average : '*'}`}
               <br />
-              {`SD: ${sd}`}
+              {`SD: ${isRevealed() ? sd : '*'}`}
             </Td>
           </Tr>
         </Tfoot>

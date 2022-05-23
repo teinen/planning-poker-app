@@ -25,13 +25,14 @@ const Room: React.FC = () => {
   }
 
   const [currentUser, setCurrentUser] = useState<DocumentData>()
+  const [room, setRoom] = useState<DocumentData>()
   const [participants, setParticipants] = useState([] as DocumentData[])
 
   const isOwner = () => {
     return currentUser?.owner === true
   }
 
-  const q = query(
+  const participantsQuery = query(
     collection(db, 'rooms', roomId, 'participants'),
     orderBy('createdAt', 'asc'),
   )
@@ -60,8 +61,21 @@ const Room: React.FC = () => {
     })
   }, [])
 
+  // Update room info
   useEffect(() => {
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const unsubscribe = onSnapshot(
+      doc(db, 'rooms', roomId),
+      (querySnapshot) => {
+        setRoom(querySnapshot.data())
+        console.log(querySnapshot.data())
+      },
+    )
+    return () => unsubscribe()
+  }, [])
+
+  // Update participants info
+  useEffect(() => {
+    const unsubscribe = onSnapshot(participantsQuery, (querySnapshot) => {
       const result: DocumentData[] = []
 
       querySnapshot.forEach((doc) => {
@@ -87,7 +101,7 @@ const Room: React.FC = () => {
         <br />
 
         <h2>Participants</h2>
-        <ParticipantList participants={participants} />
+        <ParticipantList room={room} participants={participants} />
 
         <br />
 

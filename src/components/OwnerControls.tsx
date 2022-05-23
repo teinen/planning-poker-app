@@ -22,6 +22,18 @@ const OwnerControls: React.FC = () => {
     throw new Error()
   }
 
+  const handleRevealButtonClick = async () => {
+    try {
+      const roomDocRef = doc(db, 'rooms', roomId)
+
+      await updateDoc(roomDocRef, {
+        revealed: true,
+      })
+    } catch (error) {
+      console.log('Reveal has failed')
+    }
+  }
+
   const handleResetButtonClick = async () => {
     const batch = writeBatch(db)
 
@@ -31,6 +43,9 @@ const OwnerControls: React.FC = () => {
     querySnapshot.docs.forEach((doc) => {
       batch.set(doc.ref, { ...doc.data(), estimate: '' })
     })
+
+    const roomDocRef = doc(db, 'rooms', roomId)
+    batch.set(roomDocRef, { revealed: false })
 
     await batch.commit()
   }
@@ -51,8 +66,19 @@ const OwnerControls: React.FC = () => {
 
   return (
     <>
+      <Tooltip hasArrow label="Show all estimates">
+        <Button colorScheme="blue" onClick={handleRevealButtonClick}>
+          Reveal
+        </Button>
+      </Tooltip>
+
       <Tooltip hasArrow label="Reset all estimates">
-        <Button colorScheme="blue" onClick={handleResetButtonClick}>
+        <Button
+          variant="outline"
+          colorScheme="blue"
+          ml="16px"
+          onClick={handleResetButtonClick}
+        >
           Reset
         </Button>
       </Tooltip>

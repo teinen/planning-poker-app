@@ -12,10 +12,15 @@ import { DocumentData } from 'firebase/firestore'
 import React, { useMemo } from 'react'
 
 type Props = {
+  room: DocumentData | undefined
   participants: DocumentData[]
 }
 
 const ParticipantList: React.FC<Props> = (props) => {
+  const isRevealed = (): boolean => {
+    return props.room?.revealed === true
+  }
+
   const estimates: number[] = useMemo(() => {
     return props.participants
       .filter((participant) => {
@@ -75,9 +80,9 @@ const ParticipantList: React.FC<Props> = (props) => {
           <Tr>
             <Td></Td>
             <Td isNumeric>
-              {`Average: ${average}`}
+              {`Average: ${isRevealed() ? average : '*'}`}
               <br />
-              {`SD: ${sd}`}
+              {`SD: ${isRevealed() ? sd : '*'}`}
             </Td>
           </Tr>
         </Tfoot>

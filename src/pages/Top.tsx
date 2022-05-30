@@ -14,7 +14,9 @@ const Top: React.FC = () => {
   return (
     <div css={rootStyle}>
       <p>Planning Poker App (Alpha)</p>
+
       <CreateRoomButton />
+
       <JoinRoomButton />
     </div>
   )

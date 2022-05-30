@@ -41,11 +41,11 @@ const OwnerControls: React.FC = () => {
     const querySnapshot = await getDocs(q)
 
     querySnapshot.docs.forEach((doc) => {
-      batch.set(doc.ref, { ...doc.data(), estimate: '' })
+      batch.update(doc.ref, { estimate: '' })
     })
 
     const roomDocRef = doc(db, 'rooms', roomId)
-    batch.set(roomDocRef, { revealed: false })
+    batch.update(roomDocRef, { revealed: false })
 
     await batch.commit()
   }

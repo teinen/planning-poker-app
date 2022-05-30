@@ -1,5 +1,6 @@
 import { StarIcon } from '@chakra-ui/icons'
 import {
+  Tooltip,
   TableContainer,
   Table,
   Thead,
@@ -85,7 +86,11 @@ const ParticipantList: React.FC<Props> = (props) => {
               {/* <Td>{participant.id}</Td> */}
               <Td display="flex" alignItems="center">
                 {participant.name}
-                {participant.owner && <StarIcon ml="8px" color="gold" />}
+                {participant.owner && (
+                  <Tooltip hasArrow label="Room owner">
+                    <StarIcon ml="8px" color="gold" />
+                  </Tooltip>
+                )}
               </Td>
               <Td isNumeric>{displayedEstimate(participant)}</Td>
             </Tr>

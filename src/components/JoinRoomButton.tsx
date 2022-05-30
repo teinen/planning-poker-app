@@ -62,6 +62,7 @@ const JoinRoomButton: React.FC = () => {
           status: 'error',
           position: 'top',
           isClosable: true,
+          onCloseComplete: () => setRoomIdInput(''),
         })
       } else if (docSnap.data().active === false) {
         toast({
@@ -70,6 +71,7 @@ const JoinRoomButton: React.FC = () => {
           status: 'error',
           position: 'top',
           isClosable: true,
+          onCloseComplete: () => setRoomIdInput(''),
         })
       } else {
         const participantsCollectionRef = collection(
@@ -96,19 +98,35 @@ const JoinRoomButton: React.FC = () => {
         status: 'error',
         position: 'top',
         isClosable: true,
+        onCloseComplete: () => setRoomIdInput(''),
       })
     } finally {
       setIsLoading(false)
     }
   }
 
+  const onModalCloseComplete = () => {
+    setRoomIdInput('')
+  }
+
   return (
     <>
-      <Button colorScheme="cyan" variant="outline" onClick={onOpen}>
+      <Button
+        colorScheme="cyan"
+        variant="outline"
+        onClick={onOpen}
+        mt="16px"
+        width="160px"
+      >
         Join room
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        onCloseComplete={onModalCloseComplete}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Join existing room</ModalHeader>

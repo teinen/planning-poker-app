@@ -22,11 +22,17 @@ type Props = {
   onClose: () => void
   handleNicknameInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleCreateRoomButtonClick: () => Promise<void>
+  onModalCloseComplete: () => void
 }
 
 const CreateRoomModal: React.FC<Props> = (props) => {
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} isCentered>
+    <Modal
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onCloseComplete={props.onModalCloseComplete}
+      isCentered
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Create new room</ModalHeader>

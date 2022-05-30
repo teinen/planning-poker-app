@@ -50,6 +50,19 @@ const CreateRoomButton: React.FC = () => {
       })
 
       StorageService.addParticipantId(addParticipantDocRef.id)
+
+      navigator.clipboard.writeText(
+        `${window.location.href}room/${addRoomDocRef.id}`,
+      )
+      toast({
+        title: 'Room created successfully!',
+        description: 'URL has copied! Please share with your collaborators.',
+        status: 'success',
+        position: 'top',
+        isClosable: true,
+        duration: 3000,
+      })
+
       navigate(`/room/${addRoomDocRef.id}`)
     } catch (error) {
       toast({
@@ -58,15 +71,26 @@ const CreateRoomButton: React.FC = () => {
         status: 'error',
         position: 'top',
         isClosable: true,
+        onCloseComplete: () => setNicknameInput(''),
       })
 
       setIsLoading(false)
     }
   }
 
+  const onModalCloseComplete = () => {
+    setNicknameInput('')
+  }
+
   return (
     <>
-      <Button color="white" colorScheme="cyan" onClick={onOpen}>
+      <Button
+        color="white"
+        colorScheme="cyan"
+        onClick={onOpen}
+        mt="16px"
+        width="160px"
+      >
         Create new room
       </Button>
 
@@ -77,6 +101,7 @@ const CreateRoomButton: React.FC = () => {
         onClose={onClose}
         handleNicknameInputChange={handleNicknameInputChange}
         handleCreateRoomButtonClick={handleCreateRoomButtonClick}
+        onModalCloseComplete={onModalCloseComplete}
       />
     </>
   )

@@ -1,21 +1,22 @@
+import { css } from '@emotion/react'
 import React from 'react'
 
 import CreateRoomButton from '../components/CreateRoomButton'
 import JoinRoomButton from '../components/JoinRoomButton'
 
-const rootStyle = {
-  padding: '16px 0',
-}
+const rootStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const Top: React.FC = () => {
   return (
-    <div style={rootStyle}>
-      Planning Poker App (Alpha)
-      <br />
-      <br />
+    <div css={rootStyle}>
+      <p>Planning Poker App (Alpha)</p>
+
       <CreateRoomButton />
-      <br />
-      <br />
+
       <JoinRoomButton />
     </div>
   )

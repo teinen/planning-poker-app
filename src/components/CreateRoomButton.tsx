@@ -50,6 +50,19 @@ const CreateRoomButton: React.FC = () => {
       })
 
       StorageService.addParticipantId(addParticipantDocRef.id)
+
+      navigator.clipboard.writeText(
+        `${window.location.href}room/${addRoomDocRef.id}`,
+      )
+      toast({
+        title: 'Room created successfully!',
+        description: 'URL has copied! Please share with your collaborators.',
+        status: 'success',
+        position: 'top',
+        isClosable: true,
+        duration: 3000,
+      })
+
       navigate(`/room/${addRoomDocRef.id}`)
     } catch (error) {
       toast({

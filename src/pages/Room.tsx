@@ -1,3 +1,5 @@
+import { Heading } from '@chakra-ui/react'
+import { css } from '@emotion/react'
 import {
   onSnapshot,
   query,
@@ -8,7 +10,7 @@ import {
   getDoc,
 } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
-import { useMatch } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router-dom'
 
 import CardList from '../components/CardList'
 import OwnerControls from '../components/OwnerControls'
@@ -17,11 +19,14 @@ import { db } from '../firebase'
 import StorageService from '../services/storage'
 
 const Room: React.FC = () => {
+  const navigator = useNavigate()
+
   const match = useMatch('/room/:roomId')
   const roomId = match?.params.roomId
 
   if (typeof roomId === 'undefined') {
-    throw new Error()
+    navigator('/')
+    return <></>
   }
 
   const [currentUser, setCurrentUser] = useState<DocumentData>()
@@ -88,25 +93,44 @@ const Room: React.FC = () => {
     return () => unsubscribe()
   }, [])
 
+  /* ========== Styles ========== */
+  const roomIdStyle = css`
+    margin-top: 8px;
+  `
+
+  const cardListSectionStyle = css`
+    margin-top: 16px;
+  `
+
+  const participantListSectionStyle = css`
+    margin-top: 16px;
+  `
+
   return (
     <>
-      Room Page
-      <br />
-      Room ID: {match?.params.roomId}
-      <br />
-      <div>
-        <h2>Select your card</h2>
+      <Heading as="h1" size="lg">
+        Room Page
+      </Heading>
+
+      <div css={roomIdStyle}>Room ID: {match?.params.roomId}</div>
+
+      <section css={cardListSectionStyle}>
+        <Heading as="h2" size="md" mb="8px">
+          Select your card
+        </Heading>
+
         <CardList />
+      </section>
 
-        <br />
+      <section css={participantListSectionStyle}>
+        <Heading as="h2" size="md">
+          Participants
+        </Heading>
 
-        <h2>Participants</h2>
         <ParticipantList room={room} participants={participants} />
 
-        <br />
-
         {isOwner() ? <OwnerControls /> : <></>}
-      </div>
+      </section>
     </>
   )
 }

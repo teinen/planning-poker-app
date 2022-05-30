@@ -4,20 +4,19 @@ import React from 'react'
 import CreateRoomButton from '../components/CreateRoomButton'
 import JoinRoomButton from '../components/JoinRoomButton'
 
-const createRoomButtonStyle = css`
-  margin-top: 16px;
+const rootStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const Top: React.FC = () => {
   return (
-    <>
-      Planning Poker App (Alpha)
-      <div css={createRoomButtonStyle}>hoge</div>
-      <CreateRoomButton css={createRoomButtonStyle} />
-      <br />
-      <br />
+    <div css={rootStyle}>
+      <p>Planning Poker App (Alpha)</p>
+      <CreateRoomButton />
       <JoinRoomButton />
-    </>
+    </div>
   )
 }
 

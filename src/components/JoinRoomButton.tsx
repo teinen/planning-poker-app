@@ -104,7 +104,13 @@ const JoinRoomButton: React.FC = () => {
 
   return (
     <>
-      <Button colorScheme="cyan" variant="outline" onClick={onOpen}>
+      <Button
+        colorScheme="cyan"
+        variant="outline"
+        onClick={onOpen}
+        mt="16px"
+        width="160px"
+      >
         Join room
       </Button>
 

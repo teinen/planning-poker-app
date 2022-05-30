@@ -1,23 +1,23 @@
+import { css } from '@emotion/react'
 import React from 'react'
 
 import CreateRoomButton from '../components/CreateRoomButton'
 import JoinRoomButton from '../components/JoinRoomButton'
 
-const rootStyle = {
-  padding: '16px 0',
-}
+const createRoomButtonStyle = css`
+  margin-top: 16px;
+`
 
 const Top: React.FC = () => {
   return (
-    <div style={rootStyle}>
+    <>
       Planning Poker App (Alpha)
-      <br />
-      <br />
-      <CreateRoomButton />
+      <div css={createRoomButtonStyle}>hoge</div>
+      <CreateRoomButton css={createRoomButtonStyle} />
       <br />
       <br />
       <JoinRoomButton />
-    </div>
+    </>
   )
 }
 

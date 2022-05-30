@@ -106,13 +106,17 @@ const Room: React.FC = () => {
     margin-top: 16px;
   `
 
+  const ownerControlsSectionStyle = css`
+    margin-top: 16px;
+  `
+
   return (
     <>
       <Heading as="h1" size="lg">
         Room Page
       </Heading>
 
-      <div css={roomIdStyle}>Room ID: {match?.params.roomId}</div>
+      <div css={roomIdStyle}>Room ID: {roomId}</div>
 
       <section css={cardListSectionStyle}>
         <Heading as="h2" size="md" mb="8px">
@@ -128,7 +132,9 @@ const Room: React.FC = () => {
         </Heading>
 
         <ParticipantList room={room} participants={participants} />
+      </section>
 
+      <section css={ownerControlsSectionStyle}>
         {isOwner() ? <OwnerControls /> : <></>}
       </section>
     </>

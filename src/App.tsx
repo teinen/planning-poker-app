@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <RecoilRoot>
-        <Container maxW="1124">
+        <Container padding="16px" maxW="1124">
           <Routes>
             <Route path="/" element={<Top />} />
             <Route path="/room/:roomId" element={<Room />} />

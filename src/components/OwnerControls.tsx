@@ -8,13 +8,12 @@ import {
   writeBatch,
 } from 'firebase/firestore'
 import React from 'react'
-import { useMatch, useNavigate } from 'react-router-dom'
+import { useMatch } from 'react-router-dom'
 
 import { db } from '../firebase'
+import CloseRoomButton from './CloseRoomButton'
 
 const OwnerControls: React.FC = () => {
-  const navigate = useNavigate()
-
   const match = useMatch('/room/:roomId')
   const roomId = match?.params.roomId
 
@@ -50,20 +49,6 @@ const OwnerControls: React.FC = () => {
     await batch.commit()
   }
 
-  const handleCloseButtonClick = async () => {
-    try {
-      const roomDocRef = doc(db, 'rooms', roomId)
-
-      await updateDoc(roomDocRef, {
-        active: false,
-      })
-
-      navigate('/')
-    } catch (error) {
-      console.log('Close room is failed')
-    }
-  }
-
   return (
     <>
       <Tooltip hasArrow label="Show all estimates">
@@ -83,16 +68,7 @@ const OwnerControls: React.FC = () => {
         </Button>
       </Tooltip>
 
-      <Tooltip hasArrow label="Close this room, when planning has finished">
-        <Button
-          variant="outline"
-          colorScheme="red"
-          ml="16px"
-          onClick={handleCloseButtonClick}
-        >
-          Close
-        </Button>
-      </Tooltip>
+      <CloseRoomButton />
     </>
   )
 }

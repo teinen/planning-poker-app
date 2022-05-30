@@ -58,10 +58,15 @@ const CreateRoomButton: React.FC = () => {
         status: 'error',
         position: 'top',
         isClosable: true,
+        onCloseComplete: () => setNicknameInput(''),
       })
 
       setIsLoading(false)
     }
+  }
+
+  const onModalCloseComplete = () => {
+    setNicknameInput('')
   }
 
   return (
@@ -83,6 +88,7 @@ const CreateRoomButton: React.FC = () => {
         onClose={onClose}
         handleNicknameInputChange={handleNicknameInputChange}
         handleCreateRoomButtonClick={handleCreateRoomButtonClick}
+        onModalCloseComplete={onModalCloseComplete}
       />
     </>
   )

@@ -9,7 +9,7 @@ import {
   doc,
   getDoc,
 } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
 
 import CardList from '../components/CardList'
@@ -33,9 +33,9 @@ const Room: React.FC = () => {
   const [room, setRoom] = useState<DocumentData>()
   const [participants, setParticipants] = useState([] as DocumentData[])
 
-  const isOwner = () => {
+  const isOwner = useMemo(() => {
     return currentUser?.owner === true
-  }
+  }, [currentUser])
 
   const participantsQuery = query(
     collection(db, 'rooms', roomId, 'participants'),
@@ -71,8 +71,16 @@ const Room: React.FC = () => {
     const unsubscribe = onSnapshot(
       doc(db, 'rooms', roomId),
       (querySnapshot) => {
-        setRoom(querySnapshot.data())
-        console.log(querySnapshot.data())
+        const result = querySnapshot.data()
+
+        // Redirect to Top when room is deactivated
+        if (isOwner !== true && result?.active !== true) {
+          window.alert('This room is deactivated. Move to Top.')
+          navigator('/')
+        }
+
+        setRoom(result)
+        console.log('Room: ', result)
       },
     )
     return () => unsubscribe()
@@ -88,7 +96,7 @@ const Room: React.FC = () => {
       })
 
       setParticipants(result)
-      console.log(result)
+      console.log('Participants: ', result)
     })
     return () => unsubscribe()
   }, [])
@@ -135,7 +143,7 @@ const Room: React.FC = () => {
       </section>
 
       <section css={ownerControlsSectionStyle}>
-        {isOwner() ? <OwnerControls /> : <></>}
+        {isOwner ? <OwnerControls /> : <></>}
       </section>
     </>
   )

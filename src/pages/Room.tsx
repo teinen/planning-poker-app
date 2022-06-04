@@ -193,6 +193,7 @@ const Room: React.FC = () => {
 
   const mainStyle = css`
     padding: 16px 32px;
+    flex-grow: 1;
   `
 
   const cardListSectionStyle = css`
@@ -221,7 +222,7 @@ const Room: React.FC = () => {
             </Heading>
 
             <section css={cardListSectionStyle}>
-              <Heading as="h2" size="md" mb="8px">
+              <Heading as="h3" size="md" mb="8px">
                 Select your card
               </Heading>
 

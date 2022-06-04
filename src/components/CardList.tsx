@@ -6,7 +6,7 @@ import Card from './Card'
 
 const Cards: React.FC = () => {
   return (
-    <Flex align="center" justifyContent="space-around">
+    <Flex align="center" justifyContent="space-around" mt="16px">
       {CARDS.map((card) => {
         return <Card key={card} value={card} />
       })}

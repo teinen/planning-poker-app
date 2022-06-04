@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react'
+import { css } from '@emotion/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import React from 'react'
 import { useMatch } from 'react-router-dom'
@@ -52,15 +53,28 @@ const Card: React.FC<Props> = (props) => {
     setSelectedCardState(props.value)
   }
 
+  /* ========== Styles ========== */
+  const cardStyle = css`
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      margin-top: -12px;
+    }
+  `
+
   return (
     <Box
+      css={cardStyle}
       display="flex"
       justifyContent="center"
       alignItems="center"
       p="8px"
-      w="60px"
-      h="80px"
+      w="80px"
+      h="100px"
       bg={bgColor}
+      borderRadius="md"
+      fontSize="32px"
+      fontWeight="400"
       cursor="pointer"
       onClick={handleClick}
     >

@@ -66,7 +66,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
     display: flex;
     align-items: center;
 
-    &:not(:first-child) {
+    &:not(:first-of-type) {
       margin-top: 8px;
     }
   `

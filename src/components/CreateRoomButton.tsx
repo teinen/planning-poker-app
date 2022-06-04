@@ -86,13 +86,7 @@ const CreateRoomButton: React.FC = () => {
 
   return (
     <>
-      <Button
-        color="white"
-        colorScheme="cyan"
-        onClick={onOpen}
-        mt="16px"
-        width="160px"
-      >
+      <Button color="white" colorScheme="cyan" onClick={onOpen} width="172px">
         Create new room
       </Button>
 

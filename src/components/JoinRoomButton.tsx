@@ -115,8 +115,8 @@ const JoinRoomButton: React.FC = () => {
         colorScheme="cyan"
         variant="outline"
         onClick={onOpen}
-        mt="16px"
-        width="160px"
+        ml="16px"
+        width="172px"
       >
         Join room
       </Button>

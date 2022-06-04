@@ -56,8 +56,9 @@ const CreateRoomButton: React.FC = () => {
       )
 
       toast({
-        title: 'Room created successfully!',
-        description: 'URL has copied! Please share with your collaborators.',
+        title: 'Room has created successfully!',
+        description:
+          'URL has copied to clipboard! Please share with your collaborators.',
         status: 'success',
         position: 'top',
         isClosable: true,

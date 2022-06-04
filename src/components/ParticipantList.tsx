@@ -43,7 +43,8 @@ const ParticipantList: React.FC<Props> = (props) => {
   const estimates: number[] = useMemo(() => {
     return props.participants
       .filter((participant) => {
-        return !isNaN(Number(participant.estimate))
+        const num = Number(participant.estimate)
+        return !isNaN(num) && num !== 0
       })
       .map((e) => Number(e.estimate))
   }, [props.participants])

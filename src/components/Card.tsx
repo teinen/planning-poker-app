@@ -6,7 +6,8 @@ import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { db } from '../firebase'
 import StorageService from '../services/storage'
-import { CardType, isSelectedCardSelector, selectedCardState } from '../store'
+import { isSelectedCardSelector, selectedCardState } from '../store'
+import { CardType } from '../types'
 
 type Props = {
   value: CardType

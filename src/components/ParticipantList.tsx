@@ -44,6 +44,7 @@ const ParticipantList: React.FC<Props> = (props) => {
     return props.participants
       .filter((participant) => {
         const num = Number(participant.estimate)
+        // Number('') は 0 になるため除外
         return !isNaN(num) && num !== 0
       })
       .map((e) => Number(e.estimate))

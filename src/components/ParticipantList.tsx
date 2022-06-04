@@ -76,7 +76,6 @@ const ParticipantList: React.FC<Props> = (props) => {
       <Table variant="striped">
         <Thead>
           <Tr>
-            {/* <Td>Id</Td> */}
             <Td>Name</Td>
             <Td width="50%">Estimate</Td>
           </Tr>
@@ -85,7 +84,6 @@ const ParticipantList: React.FC<Props> = (props) => {
         <Tbody>
           {props.participants.map((participant) => (
             <Tr key={participant.id}>
-              {/* <Td>{participant.id}</Td> */}
               <Td display="flex" alignItems="center">
                 {participant.name}
                 {participant.owner && (

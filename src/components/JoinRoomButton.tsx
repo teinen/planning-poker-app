@@ -157,7 +157,7 @@ const JoinRoomButton: React.FC = () => {
 
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
-              cancel
+              Cancel
             </Button>
 
             <Button

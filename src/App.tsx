@@ -9,16 +9,17 @@ import Room from './pages/Room'
 import Top from './pages/Top'
 
 function App() {
-  const headerHeight = 64
+  const headerHeight = 72
   const footerHeight = 42
 
   /* ========== Styles ========== */
   const headerStyle = css`
     height: ${headerHeight}px;
-    padding: 8px 16px;
+    padding: 16px;
     display: flex;
     align-items: center;
     color: #00a0e8;
+    border-bottom: 1px solid #d3d3d3;
   `
 
   const containerStyle = css`
@@ -29,6 +30,7 @@ function App() {
   const footerStyle = css`
     display: flex;
     color: #808080;
+    border-top: 1px solid #d3d3d3;
     justify-content: center;
     align-items: center;
     padding: 8px 0;
@@ -42,9 +44,11 @@ function App() {
   return (
     <>
       <header css={headerStyle}>
-        <Heading as="h1" size="xl">
-          <Link to="/">Ajapo</Link>
-        </Heading>
+        <Link to="/">
+          <Heading as="h1" size="xl" lineHeight="1">
+            Ajapo
+          </Heading>
+        </Link>
       </header>
 
       <div css={containerStyle}>

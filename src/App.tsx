@@ -1,7 +1,7 @@
 import { Heading } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import github from './assets/images/github.svg'
@@ -43,7 +43,7 @@ function App() {
     <>
       <header css={headerStyle}>
         <Heading as="h1" size="xl">
-          Ajapo
+          <Link to="/">Ajapo</Link>
         </Heading>
       </header>
 

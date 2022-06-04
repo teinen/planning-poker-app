@@ -54,9 +54,11 @@ const CreateRoomButton: React.FC = () => {
       navigator.clipboard.writeText(
         `${window.location.href}room/${addRoomDocRef.id}`,
       )
+
       toast({
-        title: 'Room created successfully!',
-        description: 'URL has copied! Please share with your collaborators.',
+        title: 'Room has created successfully!',
+        description:
+          'URL has copied to clipboard! Please share with your collaborators.',
         status: 'success',
         position: 'top',
         isClosable: true,
@@ -84,13 +86,7 @@ const CreateRoomButton: React.FC = () => {
 
   return (
     <>
-      <Button
-        color="white"
-        colorScheme="cyan"
-        onClick={onOpen}
-        mt="16px"
-        width="160px"
-      >
+      <Button color="white" colorScheme="cyan" onClick={onOpen} width="172px">
         Create new room
       </Button>
 

@@ -58,7 +58,7 @@ const CreateRoomModal: React.FC<Props> = (props) => {
 
         <ModalFooter>
           <Button variant="ghost" mr={3} onClick={props.onClose}>
-            cancel
+            Cancel
           </Button>
 
           <Button

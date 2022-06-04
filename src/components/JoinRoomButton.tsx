@@ -115,8 +115,8 @@ const JoinRoomButton: React.FC = () => {
         colorScheme="cyan"
         variant="outline"
         onClick={onOpen}
-        mt="16px"
-        width="160px"
+        ml="16px"
+        width="172px"
       >
         Join room
       </Button>
@@ -157,7 +157,7 @@ const JoinRoomButton: React.FC = () => {
 
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
-              cancel
+              Cancel
             </Button>
 
             <Button

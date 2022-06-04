@@ -187,6 +187,7 @@ const Room: React.FC = () => {
   /* ========== Styles ========== */
   const rootStyle = css`
     position: relative;
+    text-align: center;
   `
 
   const roomIdStyle = css`

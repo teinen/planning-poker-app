@@ -26,8 +26,6 @@ const Top: React.FC = () => {
     left: 168px;
   `
 
-  const titleStyle = css``
-
   const titleCustomFontStyle = css`
     font-family: 'Playlist';
   `
@@ -46,7 +44,7 @@ const Top: React.FC = () => {
       <img css={splashImageStyle} src={splashImg} alt="main image"></img>
 
       <div css={mainContainerStyle}>
-        <Heading css={titleStyle} as="h1" size="4xl">
+        <Heading as="h2" size="4xl">
           More Simple, <br />
           Be <span css={titleCustomFontStyle}>Agile</span>
         </Heading>

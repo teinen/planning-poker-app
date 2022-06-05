@@ -29,8 +29,10 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
 
 import CardList from '../components/CardList'
+import EstimatedCardList from '../components/EstimatedCardList'
 import OwnerControls from '../components/OwnerControls'
-import ParticipantList from '../components/ParticipantList'
+import RoomSidebar from '../components/RoomSidebar'
+import Statistics from '../components/Statistics'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
@@ -59,6 +61,10 @@ const Room: React.FC = () => {
   const isOwner = useMemo(() => {
     return currentUser?.owner === true
   }, [currentUser])
+
+  const isRevealed = useMemo(() => {
+    return room?.revealed === true
+  }, [room])
 
   const participantsQuery = query(
     collection(db, 'rooms', roomId, 'participants'),
@@ -186,24 +192,29 @@ const Room: React.FC = () => {
 
   /* ========== Styles ========== */
   const rootStyle = css`
-    position: relative;
-    text-align: center;
+    display: flex;
+    height: 100%;
   `
 
-  const roomIdStyle = css`
-    margin-top: 8px;
+  const mainStyle = css`
+    padding: 16px 32px;
+    flex-grow: 1;
   `
 
   const cardListSectionStyle = css`
     margin-top: 16px;
   `
 
-  const participantListSectionStyle = css`
+  const estimatedCardListSectionStyle = css`
+    margin-top: 32px;
+  `
+
+  const statisticsSectionStyle = css`
     margin-top: 16px;
   `
 
   const ownerControlsSectionStyle = css`
-    margin-top: 16px;
+    margin-top: 32px;
   `
 
   return (
@@ -211,33 +222,42 @@ const Room: React.FC = () => {
       {isOpen ? (
         <div></div>
       ) : (
-        <div>
-          <Heading as="h1" size="lg">
-            Room Page
-          </Heading>
+        <>
+          <RoomSidebar roomId={roomId} participants={participants} />
 
-          <div css={roomIdStyle}>Room ID: {roomId}</div>
-
-          <section css={cardListSectionStyle}>
-            <Heading as="h2" size="md" mb="8px">
-              Select your card
+          <div css={mainStyle}>
+            <Heading as="h2" size="lg">
+              Let&apos;t enjoy Planning Poker !!
             </Heading>
 
-            <CardList />
-          </section>
+            <section css={cardListSectionStyle}>
+              <Heading as="h3" size="md" mb="8px">
+                Select your card
+              </Heading>
 
-          <section css={participantListSectionStyle}>
-            <Heading as="h2" size="md">
-              Participants
-            </Heading>
+              <CardList />
+            </section>
 
-            <ParticipantList room={room} participants={participants} />
-          </section>
+            <section css={estimatedCardListSectionStyle}>
+              <Heading as="h3" size="md">
+                Estimates
+              </Heading>
 
-          <section css={ownerControlsSectionStyle}>
-            {isOwner ? <OwnerControls /> : <></>}
-          </section>
-        </div>
+              <EstimatedCardList
+                participants={participants}
+                isRevealed={isRevealed}
+              />
+            </section>
+
+            <section css={statisticsSectionStyle}>
+              <Statistics participants={participants} isRevealed={isRevealed} />
+            </section>
+
+            <section css={ownerControlsSectionStyle}>
+              {isOwner ? <OwnerControls /> : <></>}
+            </section>
+          </div>
+        </>
       )}
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>

@@ -29,8 +29,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
 
 import CardList from '../components/CardList'
+import EstimatedCardList from '../components/EstimatedCardList'
 import OwnerControls from '../components/OwnerControls'
-import ParticipantList from '../components/ParticipantList'
 import RoomSidebar from '../components/RoomSidebar'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
@@ -201,11 +201,11 @@ const Room: React.FC = () => {
   `
 
   const participantListSectionStyle = css`
-    margin-top: 16px;
+    margin-top: 32px;
   `
 
   const ownerControlsSectionStyle = css`
-    margin-top: 16px;
+    margin-top: 32px;
   `
 
   return (
@@ -230,11 +230,11 @@ const Room: React.FC = () => {
             </section>
 
             <section css={participantListSectionStyle}>
-              <Heading as="h2" size="md">
-                Participants
+              <Heading as="h3" size="md">
+                Estimates
               </Heading>
 
-              <ParticipantList room={room} participants={participants} />
+              <EstimatedCardList room={room} participants={participants} />
             </section>
 
             <section css={ownerControlsSectionStyle}>

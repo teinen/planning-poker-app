@@ -9,8 +9,10 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useMatch } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
 
 import { db } from '../firebase'
+import { selectedCardState } from '../store'
 import CloseRoomButton from './CloseRoomButton'
 
 const OwnerControls: React.FC = () => {
@@ -20,6 +22,8 @@ const OwnerControls: React.FC = () => {
   if (typeof roomId === 'undefined') {
     throw new Error()
   }
+
+  const setSelectedCardState = useSetRecoilState(selectedCardState)
 
   const handleRevealButtonClick = async () => {
     try {
@@ -47,6 +51,8 @@ const OwnerControls: React.FC = () => {
     batch.update(roomDocRef, { revealed: false })
 
     await batch.commit()
+
+    setSelectedCardState('')
   }
 
   return (

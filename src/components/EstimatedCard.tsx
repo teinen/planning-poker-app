@@ -24,6 +24,7 @@ const EstimatedCard: React.FC<Props> = (props) => {
 
   const cardStyle = css`
     border: 2px solid #c9cacb;
+    color: #454341;
   `
 
   const hideIconStyle = css`
@@ -38,7 +39,7 @@ const EstimatedCard: React.FC<Props> = (props) => {
   return (
     <div css={cardContainerStyle}>
       <Box
-        css={[cardStyle]}
+        css={cardStyle}
         display="flex"
         justifyContent="center"
         alignItems="center"

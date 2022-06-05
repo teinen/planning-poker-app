@@ -57,6 +57,7 @@ const Card: React.FC<Props> = (props) => {
   const cardStyle = css`
     transition: all 0.2s ease-in-out;
     border: 2px solid #c9cacb;
+    color: #454341;
 
     &:hover {
       background-color: #8bd3f4;

@@ -32,6 +32,7 @@ import CardList from '../components/CardList'
 import EstimatedCardList from '../components/EstimatedCardList'
 import OwnerControls from '../components/OwnerControls'
 import RoomSidebar from '../components/RoomSidebar'
+import Statistics from '../components/Statistics'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
@@ -60,6 +61,10 @@ const Room: React.FC = () => {
   const isOwner = useMemo(() => {
     return currentUser?.owner === true
   }, [currentUser])
+
+  const isRevealed = useMemo(() => {
+    return room?.revealed === true
+  }, [room])
 
   const participantsQuery = query(
     collection(db, 'rooms', roomId, 'participants'),
@@ -200,8 +205,12 @@ const Room: React.FC = () => {
     margin-top: 16px;
   `
 
-  const participantListSectionStyle = css`
+  const estimatedCardListSectionStyle = css`
     margin-top: 32px;
+  `
+
+  const statisticsSectionStyle = css`
+    margin-top: 16px;
   `
 
   const ownerControlsSectionStyle = css`
@@ -229,12 +238,19 @@ const Room: React.FC = () => {
               <CardList />
             </section>
 
-            <section css={participantListSectionStyle}>
+            <section css={estimatedCardListSectionStyle}>
               <Heading as="h3" size="md">
                 Estimates
               </Heading>
 
-              <EstimatedCardList room={room} participants={participants} />
+              <EstimatedCardList
+                participants={participants}
+                isRevealed={isRevealed}
+              />
+            </section>
+
+            <section css={statisticsSectionStyle}>
+              <Statistics participants={participants} isRevealed={isRevealed} />
             </section>
 
             <section css={ownerControlsSectionStyle}>

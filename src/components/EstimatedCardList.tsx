@@ -5,15 +5,11 @@ import React from 'react'
 import EstimatedCard from './EstimatedCard'
 
 type Props = {
-  room: DocumentData | undefined
   participants: DocumentData[]
+  isRevealed: boolean
 }
 
 const EstimatedCardList: React.FC<Props> = (props) => {
-  const isRevealed = (): boolean => {
-    return props.room?.revealed === true
-  }
-
   return (
     <Flex align="center" mt="16px">
       {props.participants.map((p) => {
@@ -22,7 +18,7 @@ const EstimatedCardList: React.FC<Props> = (props) => {
             key={p.id}
             name={p.name}
             estimate={p.estimate}
-            isRevealed={isRevealed()}
+            isRevealed={props.isRevealed}
           />
         )
       })}

@@ -25,7 +25,7 @@ const Card: React.FC<Props> = (props) => {
   const setSelectedCardState = useSetRecoilState(selectedCardState)
   const isSelectedCard = useRecoilValue(isSelectedCardSelector(props.value))
 
-  const bgColor = isSelectedCard ? 'green.200' : 'gray.200'
+  const bgColor = isSelectedCard ? '#8bd3f4' : '#e2e8f0'
 
   const handleClick = async () => {
     try {
@@ -56,15 +56,25 @@ const Card: React.FC<Props> = (props) => {
   /* ========== Styles ========== */
   const cardStyle = css`
     transition: all 0.2s ease-in-out;
+    border: 2px solid #c9cacb;
 
     &:hover {
-      margin-top: -12px;
+      background-color: #8bd3f4;
+      transform: translateY(-12px);
     }
   `
 
+  const selectedCardStyle = isSelectedCard
+    ? css`
+        border-color: #2eb1ec;
+        background-color: #8bd3f4;
+        transform: translateY(-12px);
+      `
+    : css``
+
   return (
     <Box
-      css={cardStyle}
+      css={[cardStyle, selectedCardStyle]}
       display="flex"
       justifyContent="center"
       alignItems="center"

@@ -27,6 +27,7 @@ import {
 } from 'firebase/firestore'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
+import {useSetRecoilState} from "recoil";
 
 import CardList from '../components/CardList'
 import EstimatedCardList from '../components/EstimatedCardList'
@@ -36,6 +37,7 @@ import Statistics from '../components/Statistics'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
+import {selectedCardState} from "../store";
 
 const Room: React.FC = () => {
   const navigate = useNavigate()
@@ -57,6 +59,8 @@ const Room: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isJoining, setIsJoining] = useState(false)
   const toast = useToast()
+
+  const setSelectedCardState = useSetRecoilState(selectedCardState)
 
   const isOwner = useMemo(() => {
     return currentUser?.owner === true
@@ -114,6 +118,11 @@ const Room: React.FC = () => {
         if (isOwner !== true && result?.active !== true) {
           window.alert('This room is deactivated. Move to Top.')
           navigate('/')
+        }
+
+        // Reset the card being pressed
+        if (!isOwner && result?.revealed === false) {
+          setSelectedCardState('')
         }
 
         setRoom(result)

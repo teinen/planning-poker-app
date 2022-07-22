@@ -27,7 +27,7 @@ import {
 } from 'firebase/firestore'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
-import {useSetRecoilState} from "recoil";
+import { useSetRecoilState } from 'recoil'
 
 import CardList from '../components/CardList'
 import EstimatedCardList from '../components/EstimatedCardList'
@@ -37,7 +37,7 @@ import Statistics from '../components/Statistics'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
-import {selectedCardState} from "../store";
+import { selectedCardState } from '../store'
 
 const Room: React.FC = () => {
   const navigate = useNavigate()

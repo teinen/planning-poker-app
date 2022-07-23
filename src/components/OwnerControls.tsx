@@ -1,3 +1,4 @@
+import { ViewIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Button, Tooltip } from '@chakra-ui/react'
 import {
   collection,
@@ -58,7 +59,12 @@ const OwnerControls: React.FC = () => {
   return (
     <>
       <Tooltip hasArrow label="Show all estimates">
-        <Button colorScheme="blue" onClick={handleRevealButtonClick}>
+        <Button
+          colorScheme="blue"
+          onClick={handleRevealButtonClick}
+          width="220px"
+        >
+          <ViewIcon mr="8px" />
           Reveal
         </Button>
       </Tooltip>
@@ -68,8 +74,10 @@ const OwnerControls: React.FC = () => {
           variant="outline"
           colorScheme="blue"
           ml="16px"
+          width="110px"
           onClick={handleResetButtonClick}
         >
+          <RepeatIcon mr="8px" />
           Reset
         </Button>
       </Tooltip>

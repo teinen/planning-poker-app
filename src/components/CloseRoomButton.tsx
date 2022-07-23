@@ -1,3 +1,4 @@
+import { NotAllowedIcon } from '@chakra-ui/icons'
 import { Button, useDisclosure } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
@@ -36,7 +37,14 @@ const CloseRoomButton: React.FC = () => {
 
   return (
     <>
-      <Button variant="outline" colorScheme="red" ml="16px" onClick={onOpen}>
+      <Button
+        variant="outline"
+        colorScheme="red"
+        ml="16px"
+        width="110px"
+        onClick={onOpen}
+      >
+        <NotAllowedIcon mr="8px" />
         Close
       </Button>
 

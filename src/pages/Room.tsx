@@ -236,7 +236,7 @@ const Room: React.FC = () => {
 
           <div css={mainStyle}>
             <Heading as="h2" size="lg">
-              Let&apos;t enjoy Planning Poker !!
+              Let&apos;s enjoy Planning Poker !!
             </Heading>
 
             <section css={cardListSectionStyle}>

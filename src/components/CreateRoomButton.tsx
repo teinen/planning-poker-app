@@ -50,6 +50,7 @@ const CreateRoomButton: React.FC = () => {
       })
 
       StorageService.addParticipantId(addParticipantDocRef.id)
+      StorageService.addRoomId(addRoomDocRef.id)
 
       navigator.clipboard.writeText(
         `${window.location.href}room/${addRoomDocRef.id}`,
@@ -62,7 +63,7 @@ const CreateRoomButton: React.FC = () => {
         status: 'success',
         position: 'top',
         isClosable: true,
-        duration: 3000,
+        duration: 5000,
       })
 
       navigate(`/room/${addRoomDocRef.id}`)

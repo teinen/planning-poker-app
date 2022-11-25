@@ -78,14 +78,13 @@ const Room: React.FC = () => {
   // Open room page
   useEffect(() => {
     const storageParticipantId = StorageService.getParticipantId()
-    const storageRoomId = StorageService.getRoomId()
 
-    if (!storageParticipantId || !storageRoomId) {
+    if (!storageParticipantId) {
       onOpen()
       return
     }
 
-    const roomDocRef = doc(db, 'rooms', storageRoomId)
+    const roomDocRef = doc(db, 'rooms', roomId)
     const participantDocRef = doc(
       db,
       'rooms',
@@ -185,7 +184,6 @@ const Room: React.FC = () => {
         })
 
         StorageService.addParticipantId(addParticipantDocRef.id)
-        StorageService.addRoomId(roomId)
 
         navigate(`/room/${docSnap.id}`)
       }

@@ -1,13 +1,15 @@
 import { CopyIcon } from '@chakra-ui/icons'
-import { Box, Heading, Tooltip } from '@chakra-ui/react'
+import { Box, Button, Heading, Tooltip } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import { DocumentData } from 'firebase/firestore'
+import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import React, { useState } from 'react'
 
 import userIcon from '../assets/images/user.svg'
+import { db } from '../firebase'
 
 type Props = {
   roomId: string
+  isOwner: boolean
   participants: DocumentData[]
 }
 
@@ -25,6 +27,28 @@ const RoomSidebar: React.FC<Props> = (props) => {
   const handleCopyRoomUrlButtonClick = () => {
     navigator.clipboard.writeText(roomUrl)
     setIsRoomUrlCopied(true)
+  }
+
+  const handleKickParticipantButtonClick = (participant: DocumentData) => {
+    const confirmResult = window.confirm(
+      `Are you sure you want to kick '${participant.name}'?`,
+    )
+
+    if (confirmResult === false) {
+      return
+    }
+
+    const participantDocRef = doc(
+      db,
+      'rooms',
+      props.roomId,
+      'participants',
+      participant.id,
+    )
+
+    deleteDoc(participantDocRef).then(() => {
+      window.alert('Kicked successfully.')
+    })
   }
 
   /* ========== Styles ========== */
@@ -87,8 +111,14 @@ const RoomSidebar: React.FC<Props> = (props) => {
     margin-left: 8px;
   `
 
-  const statusIconGroupStyle = css`
+  const participantRightPaneStyle = css`
     margin-left: auto;
+    display: flex;
+    align-items: center;
+  `
+
+  const statusIconGroupStyle = css`
+    margin-left: 4px;
     display: flex;
   `
 
@@ -183,42 +213,59 @@ const RoomSidebar: React.FC<Props> = (props) => {
                 <></>
               )}
 
-              <div css={statusIconGroupStyle}>
-                {/* Not yet */}
-                <Tooltip hasArrow placement="top" label="Not yet">
-                  <svg
-                    css={statusIconStyle}
-                    fill="none"
-                    stroke={p.estimate === '' ? '#ff7f50' : '#d3d3d3'}
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+              <div css={participantRightPaneStyle}>
+                {/* Kick button for room owner */}
+                {!p.owner && props.isOwner ? (
+                  <Button
+                    variant="ghost"
+                    ml="auto"
+                    colorScheme="red"
+                    size="sm"
+                    onClick={() => handleKickParticipantButtonClick(p)}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </Tooltip>
+                    kick
+                  </Button>
+                ) : (
+                  <></>
+                )}
 
-                {/* Did */}
-                <Tooltip hasArrow placement="top" label="I did !">
-                  <svg
-                    css={statusIconStyle}
-                    fill="none"
-                    stroke={p.estimate !== '' ? '#3cb371' : '#d3d3d3'}
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </Tooltip>
+                <div css={statusIconGroupStyle}>
+                  {/* Not yet */}
+                  <Tooltip hasArrow placement="top" label="Not yet">
+                    <svg
+                      css={statusIconStyle}
+                      fill="none"
+                      stroke={p.estimate === '' ? '#ff7f50' : '#d3d3d3'}
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </Tooltip>
+
+                  {/* Did */}
+                  <Tooltip hasArrow placement="top" label="I did !">
+                    <svg
+                      css={statusIconStyle}
+                      fill="none"
+                      stroke={p.estimate !== '' ? '#3cb371' : '#d3d3d3'}
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </Tooltip>
+                </div>
               </div>
             </li>
           )

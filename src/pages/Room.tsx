@@ -235,7 +235,11 @@ const Room: React.FC = () => {
         <div></div>
       ) : (
         <>
-          <RoomSidebar roomId={roomId} participants={participants} />
+          <RoomSidebar
+            roomId={roomId}
+            isOwner={isOwner}
+            participants={participants}
+          />
 
           <div css={mainStyle}>
             <Heading as="h2" size="lg">

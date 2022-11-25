@@ -50,7 +50,6 @@ const CreateRoomButton: React.FC = () => {
       })
 
       StorageService.addParticipantId(addParticipantDocRef.id)
-      StorageService.addRoomId(addRoomDocRef.id)
 
       navigator.clipboard.writeText(
         `${window.location.href}room/${addRoomDocRef.id}`,

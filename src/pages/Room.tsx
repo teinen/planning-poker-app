@@ -128,7 +128,6 @@ const Room: React.FC = () => {
         }
 
         setRoom(result)
-        console.log('Room: ', result)
       },
     )
     return () => unsubscribe()
@@ -144,7 +143,6 @@ const Room: React.FC = () => {
       })
 
       setParticipants(result)
-      console.log('Participants: ', result)
     })
     return () => unsubscribe()
   }, [])

@@ -1,5 +1,5 @@
 import { CopyIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, Tooltip } from '@chakra-ui/react'
+import { Box, Button, Heading, Tooltip, useToast } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import React, { useState } from 'react'
@@ -17,6 +17,8 @@ const RoomSidebar: React.FC<Props> = (props) => {
   const [isRoomIdCopied, setIsRoomIdCopied] = useState(false)
   const [isRoomUrlCopied, setIsRoomUrlCopied] = useState(false)
 
+  const toast = useToast()
+
   const roomUrl = `${window.location.href}`
 
   const handleCopyRoomIdButtonClick = () => {
@@ -29,9 +31,11 @@ const RoomSidebar: React.FC<Props> = (props) => {
     setIsRoomUrlCopied(true)
   }
 
-  const handleKickParticipantButtonClick = (participant: DocumentData) => {
+  const handleKickParticipantButtonClick = async (
+    participant: DocumentData,
+  ) => {
     const confirmResult = window.confirm(
-      `Are you sure you want to kick '${participant.name}'?`,
+      `Are you sure want to kick '${participant.name}'?`,
     )
 
     if (confirmResult === false) {
@@ -46,9 +50,18 @@ const RoomSidebar: React.FC<Props> = (props) => {
       participant.id,
     )
 
-    deleteDoc(participantDocRef).then(() => {
-      window.alert('Kicked successfully.')
-    })
+    try {
+      await deleteDoc(participantDocRef)
+
+      toast({
+        title: `'${participant.name}' was kicked successfully.'`,
+        status: 'success',
+        position: 'top',
+        isClosable: true,
+      })
+    } catch (error) {
+      window.alert('Failed to kick participant. Please try again.')
+    }
   }
 
   /* ========== Styles ========== */

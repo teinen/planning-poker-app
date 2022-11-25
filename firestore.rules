@@ -10,6 +10,7 @@ service cloud.firestore {
         allow create: if request.resource.id == participantId;
         allow update: if request.resource.id == participantId
                       || resource.data.owner == true;
+        allow delete;
       }
     }
   }

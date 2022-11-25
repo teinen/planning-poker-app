@@ -75,25 +75,28 @@ const Room: React.FC = () => {
     orderBy('createdAt', 'asc'),
   )
 
+  // Open room page
   useEffect(() => {
-    const participantId = StorageService.getParticipantId()
+    const storageParticipantId = StorageService.getParticipantId()
+    const storageRoomId = StorageService.getRoomId()
 
-    if (!participantId) {
+    if (!storageParticipantId || !storageRoomId) {
       onOpen()
       return
     }
 
-    const roomDocRef = doc(db, 'rooms', roomId)
+    const roomDocRef = doc(db, 'rooms', storageRoomId)
     const participantDocRef = doc(
       db,
       'rooms',
       roomId,
       'participants',
-      participantId,
+      storageParticipantId,
     )
 
     getDoc(roomDocRef).then((docSnap) => {
       if (!docSnap.exists()) {
+        window.alert('Room that you want to join does not exist.')
         navigate('/')
       }
     })
@@ -182,6 +185,8 @@ const Room: React.FC = () => {
         })
 
         StorageService.addParticipantId(addParticipantDocRef.id)
+        StorageService.addRoomId(roomId)
+
         navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {

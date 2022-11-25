@@ -89,6 +89,7 @@ const JoinRoomButton: React.FC = () => {
         })
 
         StorageService.addParticipantId(addParticipantDocRef.id)
+
         navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {

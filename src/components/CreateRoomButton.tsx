@@ -62,7 +62,7 @@ const CreateRoomButton: React.FC = () => {
         status: 'success',
         position: 'top',
         isClosable: true,
-        duration: 3000,
+        duration: 5000,
       })
 
       navigate(`/room/${addRoomDocRef.id}`)

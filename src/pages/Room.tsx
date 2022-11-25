@@ -75,10 +75,11 @@ const Room: React.FC = () => {
     orderBy('createdAt', 'asc'),
   )
 
+  // Open room page
   useEffect(() => {
-    const participantId = StorageService.getParticipantId()
+    const storageParticipantId = StorageService.getParticipantId()
 
-    if (!participantId) {
+    if (!storageParticipantId) {
       onOpen()
       return
     }
@@ -89,11 +90,12 @@ const Room: React.FC = () => {
       'rooms',
       roomId,
       'participants',
-      participantId,
+      storageParticipantId,
     )
 
     getDoc(roomDocRef).then((docSnap) => {
       if (!docSnap.exists()) {
+        window.alert('Room that you want to join does not exist.')
         navigate('/')
       }
     })
@@ -126,7 +128,6 @@ const Room: React.FC = () => {
         }
 
         setRoom(result)
-        console.log('Room: ', result)
       },
     )
     return () => unsubscribe()
@@ -142,7 +143,6 @@ const Room: React.FC = () => {
       })
 
       setParticipants(result)
-      console.log('Participants: ', result)
     })
     return () => unsubscribe()
   }, [])
@@ -182,6 +182,7 @@ const Room: React.FC = () => {
         })
 
         StorageService.addParticipantId(addParticipantDocRef.id)
+
         navigate(`/room/${docSnap.id}`)
       }
     } catch (error) {
@@ -232,7 +233,11 @@ const Room: React.FC = () => {
         <div></div>
       ) : (
         <>
-          <RoomSidebar roomId={roomId} participants={participants} />
+          <RoomSidebar
+            roomId={roomId}
+            isOwner={isOwner}
+            participants={participants}
+          />
 
           <div css={mainStyle}>
             <Heading as="h2" size="lg">

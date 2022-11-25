@@ -1,18 +1,19 @@
-enum SessionStorageKeys {
+enum StorageKeys {
   PARTICIPANT_ID = 'participantId',
 }
 
 class StorageService {
+  /* participant id */
   addParticipantId(id: string) {
-    window.sessionStorage.setItem(SessionStorageKeys.PARTICIPANT_ID, id)
+    window.localStorage.setItem(StorageKeys.PARTICIPANT_ID, id)
   }
 
   getParticipantId() {
-    return window.sessionStorage.getItem(SessionStorageKeys.PARTICIPANT_ID)
+    return window.localStorage.getItem(StorageKeys.PARTICIPANT_ID)
   }
 
   removeParticipantId() {
-    window.sessionStorage.removeItem(SessionStorageKeys.PARTICIPANT_ID)
+    window.localStorage.removeItem(StorageKeys.PARTICIPANT_ID)
   }
 }
 

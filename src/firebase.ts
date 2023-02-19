@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,4 +12,15 @@ const firebaseConfig = {
 }
 
 export const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
+
+let db
+const isEmulating = window.location.hostname === 'localhost'
+
+if (isEmulating) {
+  db = getFirestore()
+  connectFirestoreEmulator(db, 'localhost', 8080)
+} else {
+  db = getFirestore(app)
+}
+
+export { db }

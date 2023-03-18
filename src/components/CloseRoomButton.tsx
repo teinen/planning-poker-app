@@ -4,8 +4,8 @@ import { doc, updateDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
 
-import { db } from '../firebase'
 import CloseRoomModal from './CloseRoomModal'
+import { db } from '../firebase'
 
 const CloseRoomButton: React.FC = () => {
   const navigate = useNavigate()

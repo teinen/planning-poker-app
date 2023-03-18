@@ -12,9 +12,9 @@ import React from 'react'
 import { useMatch } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
+import CloseRoomButton from './CloseRoomButton'
 import { db } from '../firebase'
 import { selectedCardState } from '../store'
-import CloseRoomButton from './CloseRoomButton'
 
 const OwnerControls: React.FC = () => {
   const match = useMatch('/room/:roomId')

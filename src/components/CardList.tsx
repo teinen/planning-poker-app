@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
-import { CARDS } from '../const'
 import Card from './Card'
+import { CARDS } from '../const'
 
 const Cards: React.FC = () => {
   return (

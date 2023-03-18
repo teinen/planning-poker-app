@@ -274,7 +274,13 @@ const Room: React.FC = () => {
         </>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+        isCentered
+      >
         <ModalOverlay />
 
         <ModalContent>

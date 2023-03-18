@@ -20,7 +20,7 @@ import {
   addDoc,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { DEFAULT_NICKNAME } from '../const'
@@ -34,6 +34,8 @@ const JoinRoomButton: React.FC = () => {
   const [nicknameInput, setNicknameInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  // Modal states
+  const initialFocusRef = useRef(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toast = useToast()
@@ -123,6 +125,7 @@ const JoinRoomButton: React.FC = () => {
       </Button>
 
       <Modal
+        initialFocusRef={initialFocusRef}
         isOpen={isOpen}
         onClose={onClose}
         onCloseComplete={onModalCloseComplete}
@@ -139,6 +142,7 @@ const JoinRoomButton: React.FC = () => {
               <FormLabel htmlFor="room-id">Room id</FormLabel>
               <Input
                 id="room-id"
+                ref={initialFocusRef}
                 placeholder="Room id"
                 value={roomIdInput}
                 onChange={handleRoomIdInputChange}

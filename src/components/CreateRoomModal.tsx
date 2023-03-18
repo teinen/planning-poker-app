@@ -13,7 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useRef } from 'react'
 
 type Props = {
   isOpen: boolean
@@ -26,8 +26,11 @@ type Props = {
 }
 
 const CreateRoomModal: React.FC<Props> = (props) => {
+  const initialFocusRef = useRef(null)
+
   return (
     <Modal
+      initialFocusRef={initialFocusRef}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onCloseComplete={props.onModalCloseComplete}
@@ -49,6 +52,7 @@ const CreateRoomModal: React.FC<Props> = (props) => {
             <FormLabel htmlFor="nickname">Nickname</FormLabel>
             <Input
               id="nickname"
+              ref={initialFocusRef}
               placeholder="John Doe"
               value={props.nicknameInput}
               onChange={props.handleNicknameInputChange}

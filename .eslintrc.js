@@ -26,6 +26,7 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    'react/no-unknown-property': ['error', { 'ignore': ['css'] }],
     'unused-imports/no-unused-imports': 'error',
     'import/named': 'off',
     'import/order': [

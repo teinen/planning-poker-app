@@ -7,8 +7,8 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --verbose --fix --ext \".tsx,.ts\" --ignore-path .gitignore .",
-    "test": "jest"
+    "lint": "eslint --fix --ext \".tsx,.ts\" --ignore-path .gitignore .",
+    "test": "vitest"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",
@@ -40,7 +40,8 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "vitest": "^1.0.1"
   },
   "browserslist": {
     "production": [

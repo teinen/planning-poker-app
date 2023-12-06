@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix --ext \".tsx,.ts\" --ignore-path .gitignore .",
+    "lint": "eslint --verbose --fix --ext \".tsx,.ts\" --ignore-path .gitignore .",
     "test": "jest"
   },
   "dependencies": {
@@ -36,7 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "eslint": "^8.55.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-unused-imports": "^3.0.0",

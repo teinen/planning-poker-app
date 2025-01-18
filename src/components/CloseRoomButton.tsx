@@ -1,11 +1,12 @@
 import { NotAllowedIcon } from '@chakra-ui/icons'
 import { Button, useDisclosure } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
-import React, { useState } from 'react'
-import { useMatch, useNavigate } from 'react-router-dom'
+import type React from 'react'
+import { useState } from 'react'
+import { useMatch, useNavigate } from 'react-router'
 
-import CloseRoomModal from './CloseRoomModal'
 import { db } from '../firebase'
+import CloseRoomModal from './CloseRoomModal'
 
 const CloseRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ const CloseRoomButton: React.FC = () => {
       })
 
       navigate('/')
-    } catch (error) {
+    } catch (_error) {
       setIsLoading(false)
       console.log('Close room is failed')
     }

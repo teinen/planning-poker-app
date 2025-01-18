@@ -1,8 +1,7 @@
 import { Heading } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'jotai'
+import { Link, Route, Routes } from 'react-router'
 
 import github from './assets/images/github.svg'
 import Room from './pages/Room'
@@ -52,12 +51,12 @@ function App() {
       </header>
 
       <div css={containerStyle}>
-        <RecoilRoot>
+        <Provider>
           <Routes>
             <Route path="/" element={<Top />} />
             <Route path="/room/:roomId" element={<Room />} />
           </Routes>
-        </RecoilRoot>
+        </Provider>
       </div>
 
       <footer css={footerStyle}>
@@ -68,7 +67,7 @@ function App() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src={github}></img>
+          <img src={github} alt="GitHub" />
         </a>
       </footer>
     </>

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { DocumentData } from 'firebase/firestore'
-import React, { useMemo } from 'react'
+import type { DocumentData } from 'firebase/firestore'
+import type React from 'react'
+import { useMemo } from 'react'
 
 type Props = {
   participants: DocumentData[]
@@ -13,7 +14,7 @@ const Statistics: React.FC<Props> = (props) => {
       .filter((participant) => {
         const num = Number(participant.estimate)
         // Number('') は 0 になるため除外
-        return !isNaN(num) && num !== 0
+        return !Number.isNaN(num) && num !== 0
       })
       .map((e) => Number(e.estimate))
   }, [props.participants])

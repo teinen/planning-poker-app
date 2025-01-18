@@ -1,14 +1,14 @@
 import { Box } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import { doc, updateDoc } from 'firebase/firestore'
-import React from 'react'
-import { useMatch } from 'react-router-dom'
-import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { useSetAtom } from 'jotai'
+import type React from 'react'
+import { useMatch } from 'react-router'
 
 import { db } from '../firebase'
 import StorageService from '../services/storage'
-import { isSelectedCardSelector, selectedCardState } from '../store'
-import { CardType } from '../types'
+import { isSelectedCard, selectedCardState } from '../store'
+import type { CardType } from '../types'
 
 type Props = {
   value: CardType
@@ -22,10 +22,9 @@ const Card: React.FC<Props> = (props) => {
     throw new Error()
   }
 
-  const setSelectedCardState = useSetRecoilState(selectedCardState)
-  const isSelectedCard = useRecoilValue(isSelectedCardSelector(props.value))
+  const setSelectedCardState = useSetAtom(selectedCardState)
 
-  const bgColor = isSelectedCard ? '#8bd3f4' : '#e2e8f0'
+  const bgColor = isSelectedCard(props.value) ? '#8bd3f4' : '#e2e8f0'
 
   const handleClick = async () => {
     try {
@@ -47,7 +46,7 @@ const Card: React.FC<Props> = (props) => {
         estimate: props.value,
       })
     } catch (error) {
-      console.log('Failed to update estimate point.')
+      console.log('Failed to update estimate point.', error)
     }
 
     setSelectedCardState(props.value)
@@ -65,7 +64,7 @@ const Card: React.FC<Props> = (props) => {
     }
   `
 
-  const selectedCardStyle = isSelectedCard
+  const selectedCardStyle = isSelectedCard(props.value)
     ? css`
         border-color: #2eb1ec;
         background-color: #8bd3f4;

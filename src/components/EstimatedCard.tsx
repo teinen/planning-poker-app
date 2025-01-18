@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import React from 'react'
+import type React from 'react'
 
 type Props = {
   name: string
@@ -61,6 +61,7 @@ const EstimatedCard: React.FC<Props> = (props) => {
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
+            <title>Hide</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

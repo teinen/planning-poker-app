@@ -1,4 +1,4 @@
-import { FieldValue } from 'firebase/firestore'
+import type { FieldValue } from 'firebase/firestore'
 
 export interface RoomDoc {
   active: boolean

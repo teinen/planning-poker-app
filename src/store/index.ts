@@ -1,21 +1,8 @@
-import { atom, selectorFamily } from 'recoil'
+import { atom, useAtom } from 'jotai'
+import type { CardType } from '../types'
 
-import { RecoilAtomKeys, RecoilSelectorKeys } from './RecoilKeys'
-import { CardType } from '../types'
-
-/* ========== States ========== */
-export const selectedCardState = atom<CardType>({
-  key: RecoilAtomKeys.SELECTED_CARD_STATE,
-  default: '',
-})
-
-/* ========== Selectors ========== */
-export const isSelectedCardSelector = selectorFamily<boolean, CardType>({
-  key: RecoilSelectorKeys.IS_SELECTED_CARD,
-  get:
-    (val) =>
-    ({ get }) => {
-      const selectedCard = get(selectedCardState)
-      return val === selectedCard
-    },
-})
+export const selectedCardState = atom<CardType>('')
+export const isSelectedCard = (card: CardType) => {
+  const [selectedCard] = useAtom(selectedCardState)
+  return card === selectedCard
+}

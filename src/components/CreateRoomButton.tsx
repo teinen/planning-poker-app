@@ -1,12 +1,13 @@
 import { Button, useDisclosure, useToast } from '@chakra-ui/react'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import type React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
-import CreateRoomModal from './CreateRoomModal'
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
 import StorageService from '../services/storage'
+import CreateRoomModal from './CreateRoomModal'
 
 const CreateRoomButton: React.FC = () => {
   const navigate = useNavigate()
@@ -66,7 +67,7 @@ const CreateRoomButton: React.FC = () => {
       })
 
       navigate(`/room/${addRoomDocRef.id}`)
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Room creation is failed.',
         description: 'Please try again.',

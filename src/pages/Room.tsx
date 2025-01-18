@@ -1,34 +1,35 @@
 import {
   Button,
-  Heading,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import {
-  onSnapshot,
-  query,
+  type DocumentData,
+  addDoc,
   collection,
-  DocumentData,
-  orderBy,
   doc,
   getDoc,
-  addDoc,
+  onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useMatch, useNavigate } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import type React from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useMatch, useNavigate } from 'react-router'
 
+import { useSetAtom } from 'jotai'
 import CardList from '../components/CardList'
 import EstimatedCardList from '../components/EstimatedCardList'
 import OwnerControls from '../components/OwnerControls'
@@ -60,7 +61,7 @@ const Room: React.FC = () => {
   const [isJoining, setIsJoining] = useState(false)
   const toast = useToast()
 
-  const setSelectedCardState = useSetRecoilState(selectedCardState)
+  const setSelectedCardState = useSetAtom(selectedCardState)
 
   const isOwner = useMemo(() => {
     return currentUser?.owner === true
@@ -138,9 +139,9 @@ const Room: React.FC = () => {
     const unsubscribe = onSnapshot(participantsQuery, (querySnapshot) => {
       const result: DocumentData[] = []
 
-      querySnapshot.forEach((doc) => {
+      for (const doc of querySnapshot.docs) {
         result.push({ id: doc.id, ...doc.data() })
-      })
+      }
 
       setParticipants(result)
     })
@@ -166,26 +167,25 @@ const Room: React.FC = () => {
 
       if (!docSnap.exists() || docSnap.data().active === false) {
         throw new Error()
-      } else {
-        const participantsCollectionRef = collection(
-          db,
-          'rooms',
-          docSnap.id,
-          'participants',
-        )
-
-        const addParticipantDocRef = await addDoc(participantsCollectionRef, {
-          name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
-          estimate: '',
-          owner: false,
-          createdAt: serverTimestamp(),
-        })
-
-        StorageService.addParticipantId(addParticipantDocRef.id)
-
-        navigate(`/room/${docSnap.id}`)
       }
-    } catch (error) {
+      const participantsCollectionRef = collection(
+        db,
+        'rooms',
+        docSnap.id,
+        'participants',
+      )
+
+      const addParticipantDocRef = await addDoc(participantsCollectionRef, {
+        name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
+        estimate: '',
+        owner: false,
+        createdAt: serverTimestamp(),
+      })
+
+      StorageService.addParticipantId(addParticipantDocRef.id)
+
+      navigate(`/room/${docSnap.id}`)
+    } catch (_error) {
       toast({
         title: 'Failed to join room',
         description: 'Go back to Top page.',
@@ -230,7 +230,7 @@ const Room: React.FC = () => {
   return (
     <div css={rootStyle}>
       {isOpen ? (
-        <div></div>
+        <div />
       ) : (
         <>
           <RoomSidebar

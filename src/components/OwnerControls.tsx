@@ -1,4 +1,4 @@
-import { ViewIcon, RepeatIcon } from '@chakra-ui/icons'
+import { RepeatIcon, ViewIcon } from '@chakra-ui/icons'
 import { Button, Tooltip } from '@chakra-ui/react'
 import {
   collection,
@@ -8,13 +8,13 @@ import {
   updateDoc,
   writeBatch,
 } from 'firebase/firestore'
-import React from 'react'
-import { useMatch } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import type React from 'react'
+import { useMatch } from 'react-router'
 
-import CloseRoomButton from './CloseRoomButton'
+import { useSetAtom } from 'jotai'
 import { db } from '../firebase'
 import { selectedCardState } from '../store'
+import CloseRoomButton from './CloseRoomButton'
 
 const OwnerControls: React.FC = () => {
   const match = useMatch('/room/:roomId')
@@ -24,7 +24,7 @@ const OwnerControls: React.FC = () => {
     throw new Error()
   }
 
-  const setSelectedCardState = useSetRecoilState(selectedCardState)
+  const setSelectedCardState = useSetAtom(selectedCardState)
 
   const handleRevealButtonClick = async () => {
     try {
@@ -33,7 +33,7 @@ const OwnerControls: React.FC = () => {
       await updateDoc(roomDocRef, {
         revealed: true,
       })
-    } catch (error) {
+    } catch (_error) {
       console.log('Reveal has failed')
     }
   }
@@ -44,9 +44,9 @@ const OwnerControls: React.FC = () => {
     const q = query(collection(db, 'rooms', roomId, 'participants'))
     const querySnapshot = await getDocs(q)
 
-    querySnapshot.docs.forEach((doc) => {
+    for (const doc of querySnapshot.docs) {
       batch.update(doc.ref, { estimate: '' })
-    })
+    }
 
     const roomDocRef = doc(db, 'rooms', roomId)
     batch.update(roomDocRef, { revealed: false })

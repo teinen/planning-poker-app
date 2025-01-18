@@ -4,24 +4,25 @@ import {
   FormLabel,
   Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import {
+  addDoc,
+  collection,
   doc,
   getDoc,
-  collection,
-  addDoc,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import type React from 'react'
+import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'
@@ -94,7 +95,7 @@ const JoinRoomButton: React.FC = () => {
 
         navigate(`/room/${docSnap.id}`)
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Failed to get Room info.',
         description: 'Please try again.',

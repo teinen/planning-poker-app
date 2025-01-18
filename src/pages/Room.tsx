@@ -28,8 +28,8 @@ import {
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router'
-import { useSetRecoilState } from 'recoil'
 
+import { useSetAtom } from 'jotai'
 import CardList from '../components/CardList'
 import EstimatedCardList from '../components/EstimatedCardList'
 import OwnerControls from '../components/OwnerControls'
@@ -61,7 +61,7 @@ const Room: React.FC = () => {
   const [isJoining, setIsJoining] = useState(false)
   const toast = useToast()
 
-  const setSelectedCardState = useSetRecoilState(selectedCardState)
+  const setSelectedCardState = useSetAtom(selectedCardState)
 
   const isOwner = useMemo(() => {
     return currentUser?.owner === true

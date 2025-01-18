@@ -1,12 +1,8 @@
-import { atom } from 'jotai'
-
+import { atom, useAtom } from 'jotai'
 import type { CardType } from '../types'
 
-/* ========== States ========== */
 export const selectedCardState = atom<CardType>('')
-
-/* ========== Selectors ========== */
-export const isSelectedCardSelector = atom((get, card: CardType) => {
-  const selectedCard = get(selectedCardState)
+export const isSelectedCard = (card: CardType) => {
+  const [selectedCard] = useAtom(selectedCardState)
   return card === selectedCard
-})
+}

@@ -10,8 +10,8 @@ import {
 } from 'firebase/firestore'
 import type React from 'react'
 import { useMatch } from 'react-router'
-import { useSetRecoilState } from 'recoil'
 
+import { useSetAtom } from 'jotai'
 import { db } from '../firebase'
 import { selectedCardState } from '../store'
 import CloseRoomButton from './CloseRoomButton'
@@ -24,7 +24,7 @@ const OwnerControls: React.FC = () => {
     throw new Error()
   }
 
-  const setSelectedCardState = useSetRecoilState(selectedCardState)
+  const setSelectedCardState = useSetAtom(selectedCardState)
 
   const handleRevealButtonClick = async () => {
     try {

@@ -1,7 +1,6 @@
 import { Heading } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import github from './assets/images/github.svg'

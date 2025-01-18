@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
-import { DocumentData } from 'firebase/firestore'
-import React from 'react'
+import type { DocumentData } from 'firebase/firestore'
+import type React from 'react'
 
 import EstimatedCard from './EstimatedCard'
 

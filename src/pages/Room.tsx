@@ -1,31 +1,32 @@
 import {
   Button,
-  Heading,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import {
-  onSnapshot,
-  query,
+  type DocumentData,
+  addDoc,
   collection,
-  DocumentData,
-  orderBy,
   doc,
   getDoc,
-  addDoc,
+  onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useEffect, useMemo, useState } from 'react'
+import type React from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 

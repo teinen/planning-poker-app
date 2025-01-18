@@ -1,6 +1,6 @@
 import { Heading } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import React from 'react'
+import type React from 'react'
 
 import splashImg from '../assets/images/splash.svg'
 import CreateRoomButton from '../components/CreateRoomButton'

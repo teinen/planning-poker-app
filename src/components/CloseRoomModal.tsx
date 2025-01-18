@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import React from 'react'
+import type React from 'react'
 
 type Props = {
   isOpen: boolean

@@ -1,8 +1,9 @@
 import { CopyIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Tooltip, useToast } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
-import React, { useState } from 'react'
+import { type DocumentData, deleteDoc, doc } from 'firebase/firestore'
+import type React from 'react'
+import { useState } from 'react'
 
 import userIcon from '../assets/images/user.svg'
 import { db } from '../firebase'

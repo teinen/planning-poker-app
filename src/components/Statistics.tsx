@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { DocumentData } from 'firebase/firestore'
-import React, { useMemo } from 'react'
+import type { DocumentData } from 'firebase/firestore'
+import type React from 'react'
+import { useMemo } from 'react'
 
 type Props = {
   participants: DocumentData[]

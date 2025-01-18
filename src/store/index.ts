@@ -1,7 +1,7 @@
 import { atom, selectorFamily } from 'recoil'
 
+import type { CardType } from '../types'
 import { RecoilAtomKeys, RecoilSelectorKeys } from './RecoilKeys'
-import { CardType } from '../types'
 
 /* ========== States ========== */
 export const selectedCardState = atom<CardType>({

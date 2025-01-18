@@ -4,23 +4,24 @@ import {
   FormLabel,
   Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import {
+  addDoc,
+  collection,
   doc,
   getDoc,
-  collection,
-  addDoc,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useRef, useState } from 'react'
+import type React from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { DEFAULT_NICKNAME } from '../const'

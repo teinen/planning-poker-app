@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import React from 'react'
+import type React from 'react'
 
 type Props = {
   name: string

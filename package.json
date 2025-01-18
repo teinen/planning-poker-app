@@ -7,7 +7,8 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix --ext \".tsx,.ts\" --ignore-path .gitignore .",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
     "test": "vitest"
   },
   "dependencies": {

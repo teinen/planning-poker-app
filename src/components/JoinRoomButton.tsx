@@ -22,7 +22,7 @@ import {
 } from 'firebase/firestore'
 import type React from 'react'
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'

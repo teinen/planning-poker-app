@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import type React from 'react'
-import { useMatch } from 'react-router-dom'
+import { useMatch } from 'react-router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { db } from '../firebase'

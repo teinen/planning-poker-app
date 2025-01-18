@@ -27,7 +27,7 @@ import {
 } from 'firebase/firestore'
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
-import { useMatch, useNavigate } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router'
 import { useSetRecoilState } from 'recoil'
 
 import CardList from '../components/CardList'

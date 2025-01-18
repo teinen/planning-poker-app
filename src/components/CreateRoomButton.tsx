@@ -2,7 +2,7 @@ import { Button, useDisclosure, useToast } from '@chakra-ui/react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import type React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 import { DEFAULT_NICKNAME } from '../const'
 import { db } from '../firebase'

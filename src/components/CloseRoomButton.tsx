@@ -3,7 +3,7 @@ import { Button, useDisclosure } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import type React from 'react'
 import { useState } from 'react'
-import { useMatch, useNavigate } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router'
 
 import { db } from '../firebase'
 import CloseRoomModal from './CloseRoomModal'

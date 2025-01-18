@@ -28,6 +28,7 @@
     "vite": "^5.0.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",

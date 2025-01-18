@@ -6,7 +6,7 @@ import type { CardType } from '../types'
 export const selectedCardState = atom<CardType>('')
 
 /* ========== Selectors ========== */
-export const isSelectedCardSelector = atom((get) => {
+export const isSelectedCardSelector = atom((get, card: CardType) => {
   const selectedCard = get(selectedCardState)
-  return selectedCard !== ''
+  return card === selectedCard
 })

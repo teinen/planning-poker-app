@@ -67,7 +67,7 @@ function App() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src={github}></img>
+          <img src={github} alt="GitHub" />
         </a>
       </footer>
     </>

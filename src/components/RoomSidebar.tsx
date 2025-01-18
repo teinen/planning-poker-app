@@ -60,7 +60,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
         position: 'top',
         isClosable: true,
       })
-    } catch (error) {
+    } catch (_error) {
       window.alert('Failed to kick participant. Please try again.')
     }
   }
@@ -203,7 +203,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
         {props.participants.map((p) => {
           return (
             <li key={p.id} css={userListItemStyle}>
-              <img css={userIconStyle} src={userIcon} alt="User icon"></img>
+              <img css={userIconStyle} src={userIcon} alt="User icon" />
               <span css={userNameStyle}>{p.name}</span>
 
               {p.owner === true ? (
@@ -215,6 +215,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
+                    <title>Room owner</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -253,6 +254,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <title>Not yet</title>
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -271,6 +273,7 @@ const RoomSidebar: React.FC<Props> = (props) => {
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <title>I did !</title>
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"

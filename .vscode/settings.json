@@ -11,9 +11,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.ignoreWords": [
-    "Ajapo",
-    "Firestore",
-    "Firebase"
-  ]
+  "cSpell.ignoreWords": ["Ajapo", "Firestore", "Firebase"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

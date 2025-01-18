@@ -30,7 +30,7 @@ const CloseRoomButton: React.FC = () => {
       })
 
       navigate('/')
-    } catch (error) {
+    } catch (_error) {
       setIsLoading(false)
       console.log('Close room is failed')
     }

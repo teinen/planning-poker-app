@@ -95,7 +95,7 @@ const JoinRoomButton: React.FC = () => {
 
         navigate(`/room/${docSnap.id}`)
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Failed to get Room info.',
         description: 'Please try again.',

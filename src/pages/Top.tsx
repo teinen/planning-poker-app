@@ -41,7 +41,7 @@ const Top: React.FC = () => {
 
   return (
     <div css={rootStyle}>
-      <img css={splashImageStyle} src={splashImg} alt="main image"></img>
+      <img css={splashImageStyle} src={splashImg} alt="Ajapo splash" />
 
       <div css={mainContainerStyle}>
         <Heading as="h2" size="4xl">

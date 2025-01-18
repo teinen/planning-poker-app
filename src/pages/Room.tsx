@@ -139,9 +139,9 @@ const Room: React.FC = () => {
     const unsubscribe = onSnapshot(participantsQuery, (querySnapshot) => {
       const result: DocumentData[] = []
 
-      querySnapshot.forEach((doc) => {
+      for (const doc of querySnapshot.docs) {
         result.push({ id: doc.id, ...doc.data() })
-      })
+      }
 
       setParticipants(result)
     })
@@ -167,26 +167,25 @@ const Room: React.FC = () => {
 
       if (!docSnap.exists() || docSnap.data().active === false) {
         throw new Error()
-      } else {
-        const participantsCollectionRef = collection(
-          db,
-          'rooms',
-          docSnap.id,
-          'participants',
-        )
-
-        const addParticipantDocRef = await addDoc(participantsCollectionRef, {
-          name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
-          estimate: '',
-          owner: false,
-          createdAt: serverTimestamp(),
-        })
-
-        StorageService.addParticipantId(addParticipantDocRef.id)
-
-        navigate(`/room/${docSnap.id}`)
       }
-    } catch (error) {
+      const participantsCollectionRef = collection(
+        db,
+        'rooms',
+        docSnap.id,
+        'participants',
+      )
+
+      const addParticipantDocRef = await addDoc(participantsCollectionRef, {
+        name: nicknameInput !== '' ? nicknameInput : DEFAULT_NICKNAME,
+        estimate: '',
+        owner: false,
+        createdAt: serverTimestamp(),
+      })
+
+      StorageService.addParticipantId(addParticipantDocRef.id)
+
+      navigate(`/room/${docSnap.id}`)
+    } catch (_error) {
       toast({
         title: 'Failed to join room',
         description: 'Go back to Top page.',
@@ -231,7 +230,7 @@ const Room: React.FC = () => {
   return (
     <div css={rootStyle}>
       {isOpen ? (
-        <div></div>
+        <div />
       ) : (
         <>
           <RoomSidebar

@@ -6,9 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": [],
-    "include": ["src", "vite.config.ts"]
+    "ignoreUnknown": false
   },
   "formatter": {
     "enabled": true,
@@ -24,7 +22,8 @@
       "recommended": true,
       "correctness": {
         "noUnusedImports": "warn",
-        "noUnusedVariables": "warn"
+        "noUnusedVariables": "warn",
+        "useExhaustiveDependencies": "warn"
       }
     }
   },

@@ -12,8 +12,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.17",
-    "@chakra-ui/react": "^2.5.1",
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.10.4",
     "@emotion/react": "^11.10.6",
     "@types/node": "^20.10.3",
     "@types/react": "^18.0.28",
@@ -34,11 +34,7 @@
     "vitest": "^1.0.1"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

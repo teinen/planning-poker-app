@@ -67,7 +67,7 @@ const CreateRoomButton: React.FC = () => {
       })
 
       navigate(`/room/${addRoomDocRef.id}`)
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Room creation is failed.',
         description: 'Please try again.',

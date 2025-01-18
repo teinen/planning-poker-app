@@ -47,7 +47,7 @@ const Card: React.FC<Props> = (props) => {
         estimate: props.value,
       })
     } catch (error) {
-      console.log('Failed to update estimate point.')
+      console.log('Failed to update estimate point.', error)
     }
 
     setSelectedCardState(props.value)

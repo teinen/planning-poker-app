@@ -33,7 +33,7 @@ const OwnerControls: React.FC = () => {
       await updateDoc(roomDocRef, {
         revealed: true,
       })
-    } catch (error) {
+    } catch (_error) {
       console.log('Reveal has failed')
     }
   }
@@ -44,9 +44,9 @@ const OwnerControls: React.FC = () => {
     const q = query(collection(db, 'rooms', roomId, 'participants'))
     const querySnapshot = await getDocs(q)
 
-    querySnapshot.docs.forEach((doc) => {
+    for (const doc of querySnapshot.docs) {
       batch.update(doc.ref, { estimate: '' })
-    })
+    }
 
     const roomDocRef = doc(db, 'rooms', roomId)
     batch.update(roomDocRef, { revealed: false })
